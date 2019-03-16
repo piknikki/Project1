@@ -100,11 +100,18 @@ h3 {
 
 }
 
-.col-md-3 {
-    text-align: center;
-}
+/*.col-md-3 {*/
+    /*text-align: center;*/
+/*}*/
 
-.form-signin {
+#form-signin {
     max-width: 330px;
     margin: 0 auto;
+}
+
+
+.boom {
+    text-align: center;
+    display: block;
+    margin: 20% auto;
 }
