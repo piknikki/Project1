@@ -26,6 +26,12 @@ h3 {
     font-size: 1.2em;
 }
 
+/*. navbar section. */
+#navbar-header{
+    font-size: 25px;
+    font-weight: 500;
+}
+
 /*. header section. */
 .big-heading {
     font-family: 'Pacifico', cursive;
@@ -57,6 +63,10 @@ h3 {
 }
 
 /*. map. */
+
+#map {
+    margin: 100px;
+}
 
 .map-container{
     overflow:hidden;

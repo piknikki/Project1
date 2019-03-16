@@ -28,6 +28,26 @@
 
         <!--  Nav Bar  -->
 
+        <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
+            <a id="navbar-header" class="navbar-brand text-primary" href="#">EventSearch</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Saved Searches</a>
+                    </li>
+                </ul>
+                <a class="nav-item text-primary mr-3" href="#"><i class="fas fa-user-alt fa-2x mr-2"></i>
+                </a>
+            </div>
+        </nav>
+
         <!--  Heading Row  -->
 
         <div class="row">
@@ -58,7 +78,7 @@
 <!--  Display Map   -->
 
 <section id="map_dump">
-    <div id="map"></div>
+    <div id="map" class="text-center">Map goes here </div>
 </section>
 
 
@@ -109,8 +129,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </section>
 
