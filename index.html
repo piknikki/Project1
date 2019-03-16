@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
     <title>EventSearch</title>
 
     <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Bootswatch Styling for Improving the Aesthetics -->
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css">-->
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
     <!-- Any extra style stuff -->
     <link href="https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i|Pacifico" rel="stylesheet">
 
     <!-- My style stuff -->
+
     <!--<link rel="stylesheet" type="text/css" href="css/reset.css">-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
 
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
+    <a id="navbar-header" class="navbar-brand text-primary" href="#">EventSearch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Saved Searches</a>
+            </li>
+        </ul>
+        <a class="nav-item text-primary mr-3" href="#"><i class="fas fa-user-alt fa-2x mr-2"></i>
+        </a>
+    </div>
+</nav>
 
 <section id="title">
     <div class="container-fluid">
-
-        <!--  Nav Bar  -->
-
-        <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
-            <a id="navbar-header" class="navbar-brand text-primary" href="#">EventSearch</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Saved Searches</a>
-                    </li>
-                </ul>
-                <a class="nav-item text-primary mr-3" href="#"><i class="fas fa-user-alt fa-2x mr-2"></i>
-                </a>
-            </div>
-        </nav>
 
         <!--  Heading Row  -->
 
@@ -60,7 +72,7 @@
 </section>
 
 <!--  Search zone  -->
-<section id="main-content">
+<section id="main-content" class="text-center">
     <form class="form-inline justify-content-center">
         <div class="form-group">
             <input id="searchCity" type="text" class="form-control" name="search_city" placeholder="Enter the city...">
@@ -145,6 +157,7 @@
     </div>
 
 </section>
+
 
 
 

@@ -28,6 +28,7 @@ h3 {
 
 /*. navbar section. */
 #navbar-header{
+
     font-size: 25px;
     font-weight: 500;
 }
@@ -53,7 +54,7 @@ h3 {
 
 #main-content {
     padding-top: 50px;
-
+    
 }
 
 /*. search section. */
@@ -99,3 +100,11 @@ h3 {
 
 }
 
+.col-md-3 {
+    text-align: center;
+}
+
+.form-signin {
+    max-width: 330px;
+    margin: 0 auto;
+}
