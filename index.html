@@ -1,58 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>EventSearch</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <!-- Bootswatch Styling for Improving the Aesthetics -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css">-->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 
     <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 
     <!-- Any extra style stuff -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i|Pacifico" rel="stylesheet">
 
     <!-- My style stuff -->
+
     <!--<link rel="stylesheet" type="text/css" href="css/reset.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
 
-<div class="container">
-
-    <!-- Jumbotron Region -->
-    <div class="jumbotron">
-
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
+    <a id="navbar-header" class="navbar-brand text-primary" href="#">EventSearch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Saved Searches</a>
+            </li>
+        </ul>
+        <a class="nav-item text-primary mr-3" href="#"><i class="fas fa-user-alt fa-2x mr-2"></i>
+        </a>
     </div>
+</nav>
 
+<section id="title">
+    <div class="container-fluid">
 
-    <!-- middle content Region -->
-    <div class="">
+        <!--  Heading Row  -->
 
-    </div>
-
-
-    <!-- Footer Region -->
-    <div class="row">
-        <div class="col-sm-12">
-
-            <!-- Line Break followed by closing -->
-            <hr>
-            <h5 class="text-center">
-                <small>Made by Nikki with lots and lots of <i class="fa fa-heart"></i></small>
-            </h5>
-
+        <div class="row">
+            <div class="col-lg-10">
+                <h1 class="big-heading">Search for new and interesting events in any city</h1>
+            </div>
         </div>
     </div>
 
-</div>
+</section>
+
+<!--  Search zone  -->
+<section id="main-content" class="text-center">
+    <form class="form-inline justify-content-center">
+        <div class="form-group">
+            <input id="searchCity" type="text" class="form-control" name="search_city" placeholder="Enter the city...">
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="and dates...">
+            <span class="input-group-btn">
+                <button type="submit" id="search_button" class="btn btn-default">Search</button>
+            </span>
+        </div>
+    </form>
+
+</section>
+
+<!--  Display Map   -->
+
+<section id="map_dump">
+    <div id="map" class="text-center">Map goes here </div>
+</section>
+
+
+<!--  Display event cards   -->
+
+<section id="pricing">
+    <h2>Here are the events we found for you </h2>
+    <p>You may select the ones you like and they'll be saved in your cart.</p>
+    <div class="row">
+        <div class="pricing-column col-md-4" >
+            <div class="card">
+                <div class="card-header">
+                    <h3>Event Number 1</h3>
+                </div>
+
+                <div class="card-body">
+                    <h2>location of event</h2>
+                    <p>Short description</p>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-column col-md-4" >
+            <div class="card">
+                <div class="card-header">
+                    <h3>Event Number 2</h3>
+                </div>
+
+                <div class="card-body">
+                    <h2>location of event</h2>
+                    <p>Short description</p>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-column col-md-4" >
+            <div class="card">
+                <div class="card-header">
+                    <h3>Event Number 3</h3>
+                </div>
+
+                <div class="card-body">
+                    <h2>location of event</h2>
+                    <p>Short description</p>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+
+<section id="footer">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
 
 <!-- jQuery JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -68,8 +176,50 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+    function initMap() {
+        
+        var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+
+        var mapCanvas = document.getElementById('map'); // where to place the map in the view
+        var mapOptions = { // basic options for the map
+            center: location,
+            zoom: 16,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        // create greyscale styles
+        var styles = [
+            {"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]},
+            {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]},
+            {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]},
+            {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]},
+            {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]},
+            {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]},
+            {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]},
+            {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]},
+            {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}
+            ];
+
+         var map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
+         map.set('styles', styles); // set the greyscale
+      
+    google.maps.esvent.addDomListener(window, 'load', initMap); // render on page
+}
+  </script>
 <!-- Code to my Javascript File -->
-<script src="assets/app.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtJCYaXsCU60NdnHju2mGYnqKOZ3syenM&callback=initMap"
+async defer></script>
+
+<script src="assets/javascript/app.js"></script>
 
 
 </body>
