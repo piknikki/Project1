@@ -1,11 +1,11 @@
 /*font-family: 'Arvo', serif;*/
 /*font-family: 'Pacifico', cursive;*/
 
+
+/*. main body and overall setup. */
 body {
     font-family: 'Arvo', serif;
 }
-
-
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Arvo', serif;
@@ -21,11 +21,12 @@ h3 {
     font-size: 1.5rem;
 }
 
-p {
-    color: #8f8f8f;
+#title p {
+    color: #444;
+    font-size: 1.2em;
 }
 
-
+/*. header section. */
 .big-heading {
     font-family: 'Pacifico', cursive;
     font-weight: 700;
@@ -49,18 +50,42 @@ p {
 
 }
 
+/*. search section. */
+
 .form-inline {
     margin: 0 auto;
 }
 
-/*. pricing. */
+/*. map. */
+
+.map-container{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+.map-container iframe{
+    left:0;
+    top:0;
+    height:50%;
+    width:50%;
+    position:absolute;
+}
+
+.map-container-google-1 {
+    text-align: center;
+}
+
+/*. cards section. */
 
 #pricing {
     padding: 100px;
     text-align: center;
+    color: #444444;
 }
 
 .pricing-column {
     padding: 3% 2%;
 
 }
+
