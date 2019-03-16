@@ -5,6 +5,7 @@
 /*. main body and overall setup. */
 body {
     font-family: 'Arvo', serif;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -114,8 +115,30 @@ h3 {
 }
 
 
-.boom {
+/*.boom {*/
+    /*text-align: center;*/
+    /*display: block;*/
+    /*margin: 20% auto;*/
+/*}*/
+
+#confirmSignUp,
+#alreadyAMember {
+    width: 150px;
+}
+
+
+
+
+.footer {
     text-align: center;
-    display: block;
-    margin: 20% auto;
+    padding: 60px 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #343A40;
+    color: #007BFF;
+}
+
+#footer {
+
 }
