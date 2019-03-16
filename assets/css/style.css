@@ -33,6 +33,10 @@ h3 {
     font-weight: 500;
 }
 
+.fa-user-alt {
+    margin-left: 10px;
+}
+
 /*. header section. */
 .big-heading {
     font-family: 'Pacifico', cursive;
