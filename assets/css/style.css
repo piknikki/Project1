@@ -140,15 +140,8 @@ h3 {
     background-color: #343A40;
 }
 
-
-.icon-lamp-a path.lampshade {
-    fill: darkolivegreen;
-}
-.icon-lamp-b path.lampshade {
-    fill: turquoise;
-}
-.icon-lamp-c path.lampshade {
-    fill: papayawhip;
+.image {
+    padding: 20px 20px;
 }
 
 
