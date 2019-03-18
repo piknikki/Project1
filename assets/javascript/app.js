@@ -8,7 +8,7 @@ var listOfEvents = [];
 $("#search_button").on("click", function (event) {
 
     // clear any events from previous searches
-   clearEventList();
+    clearEventList();
 
     // get the results from the search
     var searchTitle = $("#searchKeyword").val();
@@ -18,7 +18,7 @@ $("#search_button").on("click", function (event) {
     qs = "https://app.ticketmaster.com//discovery/v2/events?apikey="
         + apiKey
         + "&city=" + city
-         + "&keyword=" + searchTitle
+        + "&keyword=" + searchTitle
         + "&countryCode=US";
 
     $.ajax({
@@ -27,14 +27,14 @@ $("#search_button").on("click", function (event) {
     }).then(function (response) {
         // response
         console.log(response);
-        
+
         // store each event that comes back from the list
         response._embedded.events.forEach(function (_event) {
-            
+
             listOfEvents.push(_event);
         })
-        
-       // create the links to the events
+
+        // create the links to the events
         createEventLinks();
     }
 
@@ -43,7 +43,7 @@ $("#search_button").on("click", function (event) {
 });
 
 function clearEventList() {
-    
+
     // clear the list of events
     while (listOfEvents.length !== 0) {
         listOfEvents.pop();
@@ -52,7 +52,12 @@ function clearEventList() {
     // update the html
     $("#event-links").empty();
 
-}
+} 
+
+$("#disp-link-location").on("click", function () {
+    
+    // add/update the location of the event on the map
+});
 
 // create an event
 // parameters:  title of event
@@ -86,7 +91,7 @@ function createEventLinks() {
     var rowNum = 0;
     for (var i = 0; i < listOfEvents.length; ++i) {
 
-        
+
         var newCol = $("<div class='pricing-column col-md-4'></div>");
         var newCard = $("<div class='card'></div>");
         var newCardHeader = $("<div class='card-header'></div>");
@@ -94,23 +99,21 @@ function createEventLinks() {
         var newCardBody = $("<div class='card-body'></div>");
         var eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
 
-        if (listOfEvents[i].promoter === "undefined")
-            var desc = "";
-        else
-             var desc = $("<p>").text(listOfEvents[i].promoter.description);
-        var linkToTickets = $("<button class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
-  
+        var desc = $("<p>").text(listOfEvents[i].promoter.description);
+        var linkToTickets = $("<button id='disp-link-loc'class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
+        
+        
 
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);
-        
+
         newCardBody.append(eventCity);
         newCardBody.append(desc);
         newCardBody.append(linkToTickets);
         newCard.append(newCardBody);
 
         newCol.append(newCard);
-       
+
 
         // if i % 3 === 0 then there is a multiple of 3 in the current row
         //  so we need to create a new row
@@ -118,7 +121,7 @@ function createEventLinks() {
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#event-links").append(newRow);
-          
+
         }
         else if (i % 3 === 0) {
             // create a new row
@@ -126,7 +129,7 @@ function createEventLinks() {
             newRow.append(newCol);
             $("#event-links").append(newRow);
             ++rowNum;
-            
+
         }
         else {
             var temp = ".r" + rowNum;
