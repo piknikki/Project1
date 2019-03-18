@@ -82,8 +82,10 @@ h3 {
 /*. map. */
 
 #map {
-    margin: 100px;
-}
+    height: 400px;
+    width:700px;
+    margin: 50px auto auto auto;
+  }
 
 .map-container{
     overflow:hidden;
