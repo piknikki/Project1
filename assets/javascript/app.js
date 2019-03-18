@@ -252,8 +252,13 @@ function createEventLinks() {
         var eventTitle = "";
         var eventCity = "";
         var desc = "";
+
         var linkToTicketsBTN = "";
         var linkToTicketsURL = "";
+
+        var linkToTickets = "";
+        var linkToSavedTickets = "";
+
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
         }
@@ -276,7 +281,11 @@ function createEventLinks() {
         }
 
         try {
+
             linkToTicketsURL = "";
+            linkToTickets = $("<button id='disp-link-loc'class='btn btn-sm btn-block btn-outline-dark'>Buy</button>");
+            linkToSavedTickets = $("<button id='disp-save-loc'class='btn btn-sm btn-block btn-outline-dark'>Save</button>");
+
         }
         catch (e) {
             linkToTicketsURL = "url not found";
@@ -320,7 +329,12 @@ function createEventLinks() {
 
         newCardBody.append(eventCity);
         newCardBody.append(desc);
+
         newCardBody.append(linkToTicketsBTN);
+
+        newCardBody.append(linkToTickets);
+        
+
         newCard.append(newCardBody);
 
         newCol.append(newCard);
