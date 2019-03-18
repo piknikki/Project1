@@ -28,11 +28,16 @@ $("#search_button").on("click", function (event) {
         // response
         console.log(response);
 
-        // store each event that comes back from the list
-        response._embedded.events.forEach(function (_event) {
+        try {
+            // store each event that comes back from the list
+            response._embedded.events.forEach(function (_event) {
 
-            listOfEvents.push(_event);
-        })
+                listOfEvents.push(_event);
+            })
+        }
+        catch (e) {
+            alert("_embedded undefined");
+        }
 
         // create the links to the events
         createEventLinks();
