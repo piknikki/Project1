@@ -257,8 +257,7 @@ function createEventLinks() {
         var linkToTicketsURL = "";
 
         var linkToTickets = "";
-        var linkToSavedTickets = "";
-
+      
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
         }
@@ -284,7 +283,6 @@ function createEventLinks() {
 
             linkToTicketsURL = "";
             linkToTickets = $("<button id='disp-link-loc'class='btn btn-sm btn-block btn-outline-dark'>Buy</button>");
-            linkToSavedTickets = $("<button id='disp-save-loc'class='btn btn-sm btn-block btn-outline-dark'>Save</button>");
 
         }
         catch (e) {
@@ -333,7 +331,6 @@ function createEventLinks() {
         newCardBody.append(linkToTicketsBTN);
 
         newCardBody.append(linkToTickets);
-        
 
         newCard.append(newCardBody);
 
@@ -354,7 +351,7 @@ function createEventLinks() {
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#event-links").append(newRow);
-            
+
 
         }
         else {
