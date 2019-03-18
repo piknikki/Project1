@@ -117,6 +117,7 @@
 
     <!-- Footer Section -->
 
+
 <footer class="footer" id="footer">
     <div class="container">
         <span class="text-primary">Created by Janelle, Kurtis, Nikki, and Steve, with 🧠 and ♥️. </span>
@@ -142,9 +143,10 @@
 
     <script>
         
+       
         function initMap() {
 
-            var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+            var location = new google.maps.LatLng(39.7392, 104.9903); // declare location in map
 
             var mapCanvas = document.getElementById('map'); // where to place the map in the view
             var mapOptions = { // basic options for the map
@@ -167,14 +169,16 @@
                 { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97 }] }
             ];
 
-            map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
+            var map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
             map.set('styles', styles); // set the greyscale
             
-
            // google.maps.esvent.addDomListener(window, 'load', initMap); // render on page
         }
     </script>
-    <!-- Code to my Javascript File -->
+   
+   <!--link in firebase -->
+   <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+<!-- Code to my Javascript File -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtJCYaXsCU60NdnHju2mGYnqKOZ3syenM&callback=initMap"
         async defer></script>
 
