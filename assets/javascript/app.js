@@ -100,13 +100,37 @@ function createEventLinks() {
         var newCol = $("<div class='pricing-column col-md-4'></div>");
         var newCard = $("<div class='card'></div>");
         var newCardHeader = $("<div class='card-header'></div>");
-        var eventTitle = $("<h3>").text(listOfEvents[i].name);
+        var eventTitle = "";
+        var eventCity = "";
+        var desc = "";
+        var linkToTickets = "";
+        try {
+            eventTitle = $("<h3>").text(listOfEvents[i].name);
+        }
+        catch (e) {
+            eventTitle = "error: name not found";
+        }
         var newCardBody = $("<div class='card-body'></div>");
-        var eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
+        try {
+           eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
+        }
+        catch (e) {
+            eventCity = "city not found";
+        }
 
-        var desc = $("<p>").text(listOfEvents[i].promoter.description);
-        var linkToTickets = $("<button id='disp-link-loc'class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
-        
+        try {
+            desc = $("<p>").text(listOfEvents[i].promoter.description);
+        }
+        catch (e) {
+            desc = "description not found";
+        }
+
+        try {
+            linkToTickets = $("<button id='disp-link-loc'class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
+        }
+        catch (e) {
+            linkToTickets = "url not found";
+        }
         
 
         newCardHeader.append(eventTitle);
