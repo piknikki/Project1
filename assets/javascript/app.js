@@ -305,6 +305,7 @@ function createEventLinks() {
 
         var linkToTicketsURL = "";
 
+
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
 
@@ -383,7 +384,6 @@ function createEventLinks() {
         newCardBody.append(linkToSavedTickets);
 
         newCardBody.append(linkToBuyTickets);
-
 
         newCard.append(newCardBody);
 
