@@ -1,3 +1,8 @@
+$("document").ready(function () {
+    $("#hide-on-load").hide();
+    console.log("Load");
+});
+
 // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
 var lat = 39.6766;
 var lng = -104.9619;
@@ -75,6 +80,8 @@ $("#search_button").on("click", function (event) {
 
       // prevent the form from submitting
     event.preventDefault();
+
+    $("#hide-on-load").show();
     
     // clear any events from previous searches
     clearSearchResults();
