@@ -115,12 +115,10 @@ $("#search_button").on("click", function (event) {
         try {
             // store each event that comes back from the list
             response._embedded.events.forEach(function (_event) {
-
                 listOfEvents.push(_event);
             })
         }
         catch (e) {
-
             // if we are here something failed in the try block
             alert("Unable to find an event. Update your search criteria.");
 
@@ -146,10 +144,8 @@ function clearSearchResults() {
     while (listOfEvents.length !== 0) {
         listOfEvents.pop();
     }
-
     // update the html
     $("#event-links").empty();
-
 }
 
 /**************************************************************************/
@@ -195,10 +191,8 @@ function createEventLinks() {
         var eventTitle = "";
         var eventCity = "";
         var desc = "";
-
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
-
 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
@@ -230,16 +224,9 @@ function createEventLinks() {
          linkToBuyTickets.on("click", function () {
 
             // TODO: have this take the user to buy tickets
-             
-             // this is the value representing which event this button is linked to in the
-             // event list (listOfEvents)
-             // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-             var indexOfEvent = parseInt( $(this).attr("btnid"));
-             location.href = listOfEvents[indexOfEvent].url;
-
-             // this alert is just to make sure the button works
-             // it can be safely deleted when the actual functionality is written
-             alert("You clicked on event number: " + (indexOfEvent + 1));
+            // this is the value representing which event this button is linked to in the
+            var indexOfEvent = parseInt( $(this).attr("btnid"));
+            location.href = listOfEvents[indexOfEvent].url;
 
          });
 
@@ -298,8 +285,6 @@ function createEventLinks() {
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#event-links").append(newRow);
-
-
         }
         else {
             var temp = ".r" + rowNum;
@@ -308,11 +293,6 @@ function createEventLinks() {
     }
 
 }
-
-
-// add this to the nav bar??
-
-
 
 var email = "";
 var pass = "";
