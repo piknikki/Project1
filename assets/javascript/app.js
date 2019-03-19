@@ -1,3 +1,8 @@
+$("document").ready(function () {
+    $("#hide-on-load").hide();
+    console.log("Load");
+});
+
 // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
 var lat = 39.6766;
 var lng = -104.9619;
@@ -75,6 +80,8 @@ $("#search_button").on("click", function (event) {
 
       // prevent the form from submitting
     event.preventDefault();
+
+    $("#hide-on-load").show();
     
     // clear any events from previous searches
     clearSearchResults();
@@ -108,19 +115,17 @@ $("#search_button").on("click", function (event) {
         // Take user input to find lattitude and longitude and re-load map with given lat-long
         lat = response._embedded.events[0]._embedded.venues[0].location.latitude;
         lng = response._embedded.events[0]._embedded.venues[0].location.longitude;
-        //reload map
+        //reload map√
         initMap();
 
         // try this block of code 
         try {
             // store each event that comes back from the list
             response._embedded.events.forEach(function (_event) {
-
                 listOfEvents.push(_event);
             })
         }
         catch (e) {
-
             // if we are here something failed in the try block
             alert("Unable to find an event. Update your search criteria.");
 
@@ -146,10 +151,8 @@ function clearSearchResults() {
     while (listOfEvents.length !== 0) {
         listOfEvents.pop();
     }
-
     // update the html
     $("#event-links").empty();
-
 }
 
 /**************************************************************************/
@@ -163,14 +166,28 @@ function clearSearchResults() {
 /**************************************************************************/
 function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
 
-    database.ref().push({
-        name: _name,
-        city: _city,
-        locLatitude: _locLat,
-        locLongitude: _locLong,
-        url: _url,
-        desc: _desc
-    });
+    if (firebase.auth().currentUser !== null) {
+        database.ref("Users/user" + firebase.auth().currentUser.uid).push({
+            name: _name,
+            city: _city,
+            locLatitude: _locLat,
+            locLongitude: _locLong,
+            url: _url,
+            desc: _desc
+        });
+    }
+    else {
+   
+
+        database.ref("general-bookmarks").push({
+            name: _name,
+            city: _city,
+            locLatitude: _locLat,
+            locLongitude: _locLong,
+            url: _url,
+            desc: _desc
+        });
+    }
 }
 
 /**************************************************************************/
@@ -195,10 +212,8 @@ function createEventLinks() {
         var eventTitle = "";
         var eventCity = "";
         var desc = "";
-
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
-
 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
@@ -230,16 +245,9 @@ function createEventLinks() {
          linkToBuyTickets.on("click", function () {
 
             // TODO: have this take the user to buy tickets
-             
-             // this is the value representing which event this button is linked to in the
-             // event list (listOfEvents)
-             // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-             var indexOfEvent = parseInt( $(this).attr("btnid"));
-             location.href = listOfEvents[indexOfEvent].url;
-
-             // this alert is just to make sure the button works
-             // it can be safely deleted when the actual functionality is written
-             alert("You clicked on event number: " + (indexOfEvent + 1));
+            // this is the value representing which event this button is linked to in the
+            var indexOfEvent = parseInt( $(this).attr("btnid"));
+            location.href = listOfEvents[indexOfEvent].url;
 
          });
 
@@ -298,8 +306,6 @@ function createEventLinks() {
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#event-links").append(newRow);
-
-
         }
         else {
             var temp = ".r" + rowNum;
@@ -309,11 +315,6 @@ function createEventLinks() {
 
 }
 
-
-// add this to the nav bar??
-
-
-
 var email = "";
 var pass = "";
 var btnSignUp = $("#confirmSignUp");
@@ -321,12 +322,15 @@ var btnLogIn = $("#alreadyAMember");
 var btnLogOut = $("#logOut");
 
 // Login event -- pass user email and password
-$(btnLogIn).on("click", function() {  // returns promises
+$(btnLogIn).on("click", function (e) {  // returns promises
+    e.preventDefault();
     email = $("#email").val().trim();
     pass = $("#password").val().trim();
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+   
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
         console.log(error.code);
     });
+
 });
 
 
@@ -351,9 +355,23 @@ $(btnLogOut).on("click", function() {
     });
 });
 
+$("#pop").on("click", function () {
+    alert("user id: " + firebase.auth().currentUser);
+});
+
+$("#pip").on("click", function () {
+    firebase.auth().signOut().then(function() {
+        console.log("successfully signed out")
+    }).catch(function(error) {
+        console.log(error.code);
+    });
+});
+
 // auth listener
 firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
+        
+        alert("user has signed in, id is: " + firebaseUser.uid);
         // var displayEmail = firebaseUser.email;
         // var emailVerified = firebaseUser.emailVerified;
         var userId = firebaseUser.uid;
