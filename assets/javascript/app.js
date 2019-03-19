@@ -54,9 +54,8 @@ var config = {
     storageBucket: "classproject-1db.appspot.com",
     messagingSenderId: "90720089463"
 };
+
 firebase.initializeApp(config);
-
-
 
 // create a handle to the database
 var database = firebase.database();
@@ -223,9 +222,9 @@ function createEventLinks() {
 
         var linkToTicketsURL = "";
 
-
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
+
 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
@@ -301,7 +300,9 @@ function createEventLinks() {
 
         newCardBody.append(linkToSavedTickets);
 
+
         newCardBody.append(linkToBuyTickets);
+
 
         newCard.append(newCardBody);
 
@@ -331,4 +332,88 @@ function createEventLinks() {
         }
     }
 
+
 }
+
+///////////////////////////
+//
+
+
+
+// add this to the nav bar??
+// log out button
+// <button id="btnLogOut" class="btn btn-sm btn-block btn-outline-dark hide">Log Out</button>
+
+var email = "";
+var pass = "";
+var btnSignUp = $("#confirmSignUp");
+var btnLogIn = $("#alreadyAMember");
+var btnLogOut = $("#logOut");
+
+// Login event -- pass user email and password
+$(btnLogIn).on("click", function() {  // returns promises
+    email = $("#email").val().trim();
+    pass = $("#password").val().trim();
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+        console.log(error.code);
+    });
+});
+
+// create a new account, passing user's email and password input
+// user is automatically logged in
+$(btnSignUp).on("click", function(e) {
+    e.preventDefault();
+    email = $("#email").val().trim();
+    pass = $("#password").val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+
+        console.log(error.code);
+    });
+});
+
+// signs user out
+$(btnLogOut).on("click", function() {
+    firebase.auth().signOut().then(function() {
+        console.log("successfully signed out")
+    }).catch(function(error) {
+        console.log(error.code);
+    });
+});
+
+// auth listener
+firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether or not user is logged in
+    if (firebaseUser) {
+        // var displayEmail = firebaseUser.email;
+        // var emailVerified = firebaseUser.emailVerified;
+        var userId = firebaseUser.uid;
+        console.log("user id: " + userId);
+        console.log("firebaseuser object: " + firebaseUser);
+        btnLogOut.removeClass("hide"); // removes hide class to show the button
+    } else {
+
+        console.log("not logged in")
+        btnLogOut.addClass("hide"); // adds hide class to hide the button
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

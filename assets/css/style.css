@@ -28,6 +28,12 @@ h3 {
 }
 
 /*. navbar section. */
+
+#logo {
+    width: 40px;
+    height: auto;
+    padding-right: 10px;
+}
 #navbar-header{
 
     font-size: 25px;
@@ -65,6 +71,7 @@ h3 {
 }
 
 .container-fluid {
+    height: 30vh;
     padding: 3% 15% 7%;
 }
 
