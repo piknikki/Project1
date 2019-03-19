@@ -115,7 +115,7 @@ $("#search_button").on("click", function (event) {
         // Take user input to find lattitude and longitude and re-load map with given lat-long
         lat = response._embedded.events[0]._embedded.venues[0].location.latitude;
         lng = response._embedded.events[0]._embedded.venues[0].location.longitude;
-        //reload map
+        //reload map√
         initMap();
 
         // try this block of code 
@@ -166,14 +166,28 @@ function clearSearchResults() {
 /**************************************************************************/
 function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
 
-    database.ref().push({
-        name: _name,
-        city: _city,
-        locLatitude: _locLat,
-        locLongitude: _locLong,
-        url: _url,
-        desc: _desc
-    });
+    if (firebase.auth().currentUser !== null) {
+        database.ref("Users/user" + firebase.auth().currentUser.uid).push({
+            name: _name,
+            city: _city,
+            locLatitude: _locLat,
+            locLongitude: _locLong,
+            url: _url,
+            desc: _desc
+        });
+    }
+    else {
+   
+
+        database.ref("general-bookmarks").push({
+            name: _name,
+            city: _city,
+            locLatitude: _locLat,
+            locLongitude: _locLong,
+            url: _url,
+            desc: _desc
+        });
+    }
 }
 
 /**************************************************************************/
@@ -308,12 +322,15 @@ var btnLogIn = $("#alreadyAMember");
 var btnLogOut = $("#logOut");
 
 // Login event -- pass user email and password
-$(btnLogIn).on("click", function() {  // returns promises
+$(btnLogIn).on("click", function (e) {  // returns promises
+    e.preventDefault();
     email = $("#email").val().trim();
     pass = $("#password").val().trim();
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+   
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
         console.log(error.code);
     });
+
 });
 
 
@@ -338,9 +355,23 @@ $(btnLogOut).on("click", function() {
     });
 });
 
+$("#pop").on("click", function () {
+    alert("user id: " + firebase.auth().currentUser);
+});
+
+$("#pip").on("click", function () {
+    firebase.auth().signOut().then(function() {
+        console.log("successfully signed out")
+    }).catch(function(error) {
+        console.log(error.code);
+    });
+});
+
 // auth listener
 firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
+        
+        alert("user has signed in, id is: " + firebaseUser.uid);
         // var displayEmail = firebaseUser.email;
         // var emailVerified = firebaseUser.emailVerified;
         var userId = firebaseUser.uid;
