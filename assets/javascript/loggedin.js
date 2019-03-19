@@ -18,8 +18,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
-
 // create a handle to the database
 var database = firebase.database();
 
