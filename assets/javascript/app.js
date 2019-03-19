@@ -1,3 +1,44 @@
+
+// var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+var lat = 39.6766;
+var lng = -104.9619;
+var res;
+
+//Load Map using user location
+function initMap() {
+
+
+    // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+    var location = new google.maps.LatLng(lat, lng); // declare location in map
+
+
+    var mapCanvas = document.getElementById('map'); // where to place the map in the view
+    var mapOptions = { // basic options for the map
+        center: location,
+        zoom: 12,
+        panControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
+
+    //Loop through events to drop pin on each latitude
+    for (var i = 0; i < res._embedded.events.length; i++) {
+        console.log("made it");
+
+        //Create new markers for each event
+        marker = new google.maps.Marker({
+            position: {
+                lat: parseFloat(res._embedded.events[i]._embedded.venues[0].location.latitude),
+                lng: parseFloat(res._embedded.events[i]._embedded.venues[0].location.longitude)
+            },
+            //Display event name on hover
+            title: res._embedded.events[i].name,
+            map: map,
+        });
+    }
+
+}
+
 /********************************************************************************/
 /*                                                                              */
 /*      this is the app.js file                                                 */
@@ -35,15 +76,16 @@ var numBookmarks = 0;
 /**************************************************************************/
 $("#search_button").on("click", function (event) {
 
+      // prevent the form from submitting
+    event.preventDefault();
+    
     // clear any events from previous searches
     clearSearchResults();
 
     // get the results from the search
     var searchTitle = $("#searchKeyword").val();
 
-    // prevent the form from submitting
-    event.preventDefault();
-
+  
     // gert the value from the city search field
     city = $("#searchCity").val();
 
@@ -65,6 +107,14 @@ $("#search_button").on("click", function (event) {
     }).then(function (response) {
         // response
         console.log(response);
+
+        // MAP FUNCTIONALITY (change map coords)
+        res = response;
+        // Take user input to find lattitude and longitude and re-load map with given lat-long
+        lat = response._embedded.events[0]._embedded.venues[0].location.latitude;
+        lng = response._embedded.events[0]._embedded.venues[0].location.longitude;
+        //reload map
+        initMap();
 
         // try this block of code 
         try {
@@ -266,7 +316,7 @@ function createEventLinks() {
             $("#event-links").append(newRow);
 
         }
-        else if (i % 3 === 0) {
+        else if ((i % 3) === 0) {
             // create a new row
             ++rowNum;
             var newRow = $("<div class='row r" + rowNum + "'></div>");
