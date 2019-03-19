@@ -101,15 +101,8 @@ firebase.database().ref().on("value", function (_snapshot) {
          // click event for the event
          linkToBuyTickets.on("click", function () {
         
-            // TODO: have this take the user to buy tickets
-             // this is the value representing which event this button is linked to in the
-             // event list (listOfEvents)
-             // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
              var indexOfEvent = parseInt( $(this).attr("btnid"));
              location.href = url;
-             // this alert is just to make sure the button works
-             // it can be safely deleted when the actual functionality is written
-             alert("You clicked on event number: " + (indexOfEvent + 1));
 
          });
         
