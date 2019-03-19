@@ -42,21 +42,22 @@
 </head>
 
 <body>
+<!--  Nav Bar  -->
 
-    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
-        <img id="logo" src="assets/images/eventlogo.png" alt="EventSearch Logo">EventSearch
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
+    <a id="navbar-header" class="navbar-brand text-primary" href="index.html"><img id="logo" src="assets/images/eventlogo.png" alt="EventSearch Logo">EventSearch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item"><a class="nav-link text-primary mr-3" href="#">Log Out</a></li>
-                <li class="nav-item"><a class="nav-link text-primary mr-3" href="http://www.purplepants.io/Project1/signup.html">Login or Register</a></li>
-                <li class="nav-item"><i class="fas fa-user-alt fa-2x mr-2"></i></li>
-            </ul>
-        </div>
-    </nav>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item"><a class="nav-link text-primary mr-3" href="#">Log Out</a></li>
+            <li class="nav-item"><a class="nav-link text-primary mr-3" href="http://www.purplepants.io/Project1/signup.html">Login or Register</a></li>
+            <li class="nav-item"><i class="fas fa-user-alt fa-2x mr-2"></i></li>
+        </ul>
+    </div>
+</nav>
 
     <section id="title">
         <div class="container-fluid">
@@ -73,16 +74,19 @@
     </section>
 
     <!--  Search zone  -->
-    <section id="main-content" class="text-center">
+    <section id="main-content" class="text-center pb-5">
         <form class="form-inline justify-content-center">
             <div class="form-group">
-                <input id="searchCity" type="text" class="form-control" name="search_city"
+
+                <input id="searchCity" type="text" class="form-control rounded" name="search_city"
                     placeholder="Enter the city...">
             </div>
             <div class="input-group">
-                <input id="searchKeyword" type="text" class="form-control" placeholder="Keyword (optional)...">
+
+                <input id="searchKeyword" type="text" class="form-control rounded" placeholder="Keyword (optional)...">
+
                 <span class="input-group-btn">
-                    <button id="search_button" class="btn btn-default">Search</button>
+                    <button id="search_button" class="btn btn-default ml-2 border">Search</button>
                 </span>
             </div>
         </form>
@@ -91,11 +95,12 @@
 
     <!--  Display Map   -->
     <section id="map_dump">
-        <div id="map" class="text-center">Map goes here </div>
+        <div id="map" class="text-center mt-0">Map goes here </div>
     </section>
 
 
     <!--  Display event cards   -->
+
     <section id="pricing">
         <img class="image" src="assets/images/icecream.png"><img class="image" src="assets/images/theatre.png"><img class="image" src="assets/images/turntable.png">
         <h2>Here are the events we found for you </h2>
