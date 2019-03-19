@@ -307,12 +307,12 @@ function createEventLinks() {
         }
     }
 
-
 }
 
+
 // add this to the nav bar??
-// log out button
-// <button id="btnLogOut" class="btn btn-sm btn-block btn-outline-dark hide">Log Out</button>
+
+
 
 var email = "";
 var pass = "";
@@ -328,6 +328,7 @@ $(btnLogIn).on("click", function() {  // returns promises
         console.log(error.code);
     });
 });
+
 
 // create a new account, passing user's email and password input
 // user is automatically logged in
@@ -365,25 +366,4 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether 
         btnLogOut.addClass("hide"); // adds hide class to hide the button
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
