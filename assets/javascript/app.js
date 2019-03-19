@@ -173,9 +173,9 @@ function createEventLinks() {
 
         var linkToTicketsURL = "";
 
-
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
+
 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
@@ -251,7 +251,9 @@ function createEventLinks() {
 
         newCardBody.append(linkToSavedTickets);
 
+
         newCardBody.append(linkToBuyTickets);
+
 
         newCard.append(newCardBody);
 
