@@ -71,6 +71,7 @@ h3 {
 }
 
 .container-fluid {
+    height: 30vh;
     padding: 3% 15% 7%;
 }
 
