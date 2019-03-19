@@ -1,4 +1,42 @@
+// var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+var lat = 39.6766;
+var lng = -104.9619;
+var res;
 
+//Load Map using user location
+function initMap() {
+
+
+    // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+    var location = new google.maps.LatLng(lat, lng); // declare location in map
+
+
+    var mapCanvas = document.getElementById('map'); // where to place the map in the view
+    var mapOptions = { // basic options for the map
+        center: location,
+        zoom: 12,
+        panControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
+
+    //Loop through events to drop pin on each latitude
+    for (var i = 0; i < res._embedded.events.length; i++) {
+        console.log("made it");
+
+        //Create new markers for each event
+        marker = new google.maps.Marker({
+            position: {
+                lat: parseFloat(res._embedded.events[i]._embedded.venues[0].location.latitude),
+                lng: parseFloat(res._embedded.events[i]._embedded.venues[0].location.longitude)
+            },
+            //Display event name on hover
+            title: res._embedded.events[i].name,
+            map: map,
+        });
+    }
+
+}
 
 var city = "";
 var apiKey = "fN2JT7PZlbQ8jAFoGeun4pAKP8Rg8y5z";
@@ -9,6 +47,10 @@ $("#search_button").on("click", function (event) {
 
     // clear any events from previous searches
     clearEventList();
+
+    // Grab user location
+    var userLocation = $("#searchCity").val();
+    console.log(userLocation);
 
     // get the results from the search
     var searchTitle = $("#searchKeyword").val();
@@ -27,6 +69,12 @@ $("#search_button").on("click", function (event) {
     }).then(function (response) {
         // response
         console.log(response);
+        res = response;
+        // Take user input to find lattitude and longitude and re-load map with given lat-long
+        lat = response._embedded.events[0]._embedded.venues[0].location.latitude;
+        lng = response._embedded.events[0]._embedded.venues[0].location.longitude;
+        //Reload map
+        initMap();
 
         try {
             // store each event that comes back from the list
@@ -57,10 +105,10 @@ function clearEventList() {
     // update the html
     $("#event-links").empty();
 
-} 
+}
 
 $("#disp-link-location").on("click", function () {
-    
+
     // add/update the location of the event on the map
 });
 
@@ -112,7 +160,7 @@ function createEventLinks() {
         }
         var newCardBody = $("<div class='card-body'></div>");
         try {
-           eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
+            eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
         }
         catch (e) {
             eventCity = "city not found";
@@ -131,7 +179,7 @@ function createEventLinks() {
         catch (e) {
             linkToTickets = "url not found";
         }
-        
+
 
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);

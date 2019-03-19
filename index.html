@@ -6,6 +6,19 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
     <title>EventSearch</title>
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <!-- JS for Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Bootstrap CSS -->
 
@@ -94,7 +107,7 @@
     <section id="pricing">
         <h2>Here are the events we found for you </h2>
         <p>You may select the ones you like and they'll be saved in your cart.</p>
-        <div class="container" id ="event-links"> </div>
+        <div class="container" id="event-links"> </div>
 
     </section>
 
@@ -120,71 +133,15 @@
             <span class="text-muted">Created by Janelle, Kurtis, Nikki, and Steve, with 🧠 and ♥️. </span>
         </div>
     </section>
-
-
-
-
     </section>
-
-
-
-
-
-
-    <!-- jQuery JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-
-    <!-- JS for Bootstrap -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <script>
-        
-        function initMap() {
 
-            var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
-
-            var mapCanvas = document.getElementById('map'); // where to place the map in the view
-            var mapOptions = { // basic options for the map
-                center: location,
-                zoom: 16,
-                panControl: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-
-            // create greyscale styles
-            var styles = [
-                { "featureType": "landscape", "stylers": [{ "saturation": -100 }, { "lightness": 65 }, { "visibility": "on" }] },
-                { "featureType": "poi", "stylers": [{ "saturation": -100 }, { "lightness": 51 }, { "visibility": "simplified" }] },
-                { "featureType": "road.highway", "stylers": [{ "saturation": -100 }, { "visibility": "simplified" }] },
-                { "featureType": "road.arterial", "stylers": [{ "saturation": -100 }, { "lightness": 30 }, { "visibility": "on" }] },
-                { "featureType": "road.local", "stylers": [{ "saturation": -100 }, { "lightness": 40 }, { "visibility": "on" }] },
-                { "featureType": "transit", "stylers": [{ "saturation": -100 }, { "visibility": "simplified" }] },
-                { "featureType": "administrative.province", "stylers": [{ "visibility": "off" }] },
-                { "featureType": "water", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": -25 }, { "saturation": -100 }] },
-                { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97 }] }
-            ];
-
-            map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
-            map.set('styles', styles); // set the greyscale
-            
-
-           // google.maps.esvent.addDomListener(window, 'load', initMap); // render on page
-        }
     </script>
+
+    <script src="assets/javascript/app.js"></script>
     <!-- Code to my Javascript File -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtJCYaXsCU60NdnHju2mGYnqKOZ3syenM&callback=initMap"
         async defer></script>
-
-    <script src="assets/javascript/app.js"></script>
-
 
 </body>
 
@@ -194,7 +151,7 @@
 
 
 
-     <!-- <div class="row">
+<!-- <div class="row">
                 <div class="pricing-column col-md-4">
                     <div class="card">
                         <div class="card-header">
