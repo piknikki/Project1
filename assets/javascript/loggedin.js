@@ -18,8 +18,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-
-
 // create a handle to the database
 var database = firebase.database();
 
@@ -40,24 +38,18 @@ function loadBookmark(_name, _city, _locLat, _locLong, _url, _desc, _pos, _rowNu
     var eventTitle =  $("<h3>").text(_name);
     var eventCity = $("<h2>").text(_city);
     var desc = $("<p>").text(_desc);
-    var linkToTicketsURL = _url;
-
     var newCardBody = $("<div class='card-body'></div>");
 
     linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + _pos + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
-     linkToSavedTickets = $("<button id='disp-save-loc'  btnid='" + _pos + "' class= 'btn btn-sm btn-block btn-outline-dark'>Save</button>");
+    linkToSavedTickets = $("<button id='disp-save-loc'  btnid='" + _pos + "' class= 'btn btn-sm btn-block btn-outline-dark'>Save</button>");
 
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);
-
         newCardBody.append(eventCity);
         newCardBody.append(desc);
         newCardBody.append(linkToSavedTickets);
         newCardBody.append(linkToBuyTickets);
-
-
         newCard.append(newCardBody);
-
         newCol.append(newCard);
 
     // if i % 3 === 0 then there is a multiple of 3 in the current row
@@ -74,8 +66,6 @@ function loadBookmark(_name, _city, _locLat, _locLong, _url, _desc, _pos, _rowNu
         var newRow = $("<div class='row r" + _rowNum + "'></div>");
         newRow.append(newCol);
         $("#t").append(newRow);
-
-
     }
     else {
         var temp = ".r" + _rowNum;
@@ -103,22 +93,20 @@ firebase.database().ref().on("value", function (_snapshot) {
         var eventTitle = $("<h3>").text(_item.val().name);
         var eventCity = $("<h2>").text(_item.val().city);
         var desc = $("<p>").text(_item.val().desc);
-        var linkToTicketsURL = "";
+        var url = _item.val().url;
 
         var newCardBody = $("<div class='card-body'></div>");
-
         linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
       
          // click event for the event
          linkToBuyTickets.on("click", function () {
-
+        
             // TODO: have this take the user to buy tickets
-             
              // this is the value representing which event this button is linked to in the
              // event list (listOfEvents)
              // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
              var indexOfEvent = parseInt( $(this).attr("btnid"));
-
+             location.href = url;
              // this alert is just to make sure the button works
              // it can be safely deleted when the actual functionality is written
              alert("You clicked on event number: " + (indexOfEvent + 1));
@@ -127,14 +115,10 @@ firebase.database().ref().on("value", function (_snapshot) {
         
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);
-
         newCardBody.append(eventCity);
         newCardBody.append(desc);
         newCardBody.append(linkToBuyTickets);
-
-
         newCard.append(newCardBody);
-
         newCol.append(newCard);
 
         // if i % 3 === 0 then there is a multiple of 3 in the current row
@@ -151,14 +135,12 @@ firebase.database().ref().on("value", function (_snapshot) {
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#t").append(newRow);
-
-
         }
         else {
             var temp = ".r" + rowNum;
             $(temp).append(newCol);
         }
-        ++i;
+            i++;
 
     });
 

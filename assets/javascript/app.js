@@ -1,3 +1,7 @@
+$("document").ready(function () {
+    $("#hide-on-load").hide();
+    console.log("Load");
+});
 
 // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
 var lat = 39.6766;
@@ -23,7 +27,6 @@ function initMap() {
 
     //Loop through events to drop pin on each latitude
     for (var i = 0; i < res._embedded.events.length; i++) {
-        console.log("made it");
 
         //Create new markers for each event
         marker = new google.maps.Marker({
@@ -77,6 +80,8 @@ $("#search_button").on("click", function (event) {
 
       // prevent the form from submitting
     event.preventDefault();
+
+    $("#hide-on-load").show();
     
     // clear any events from previous searches
     clearSearchResults();
@@ -104,8 +109,6 @@ $("#search_button").on("click", function (event) {
         url: qs,
         method: "GET"
     }).then(function (response) {
-        // response
-        console.log(response);
 
         // MAP FUNCTIONALITY (change map coords)
         res = response;
@@ -126,16 +129,13 @@ $("#search_button").on("click", function (event) {
         catch (e) {
 
             // if we are here something failed in the try block
-            alert("_embedded undefined");
-            console.log(e);
+            alert("Unable to find an event. Update your search criteria.");
+
         }
 
         // create the links to the events
         createEventLinks();
-    }
-
-
-    );
+    });
 });
 
 /**************************************************************************/
@@ -192,23 +192,6 @@ function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
 /**************************************************************************/
 function createEventLinks() {
 
-    // create a row witth some columns
-    // <div class="row">
-    //             <div class="pricing-column col-md-4">
-    //                 <div class="card">
-    //                     <div class="card-header">
-    //                         <h3>Event Number 1</h3>
-    //                     </div>
-
-    //                     <div class="card-body">
-    //                         <h2>location of event</h2>
-    //                         <p>Short description</p>
-    //                         <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
-    //                     </div>
-    //                 </div>
-    //             </div>
-
-    // create the links to the events
     var rowNum = 0;
     for (var i = 0; i < listOfEvents.length; ++i) {
 
@@ -219,8 +202,6 @@ function createEventLinks() {
         var eventTitle = "";
         var eventCity = "";
         var desc = "";
-
-        var linkToTicketsURL = "";
 
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
@@ -245,19 +226,29 @@ function createEventLinks() {
         }
         catch (e) {
             desc = "description not found";
+            $("<p>").hide(desc="");
         }
 
-        try {
-
-            linkToTicketsURL = "";
-        }
-        catch (e) {
-            linkToTicketsURL = "url not found";
-        }
 
         linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
         linkToSavedTickets = $("<button id='disp-save-loc'  btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Save</button>");
 
+         // click event for the event
+         linkToBuyTickets.on("click", function () {
+
+            // TODO: have this take the user to buy tickets
+             
+             // this is the value representing which event this button is linked to in the
+             // event list (listOfEvents)
+             // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
+             var indexOfEvent = parseInt( $(this).attr("btnid"));
+             location.href = listOfEvents[indexOfEvent].url;
+
+             // this alert is just to make sure the button works
+             // it can be safely deleted when the actual functionality is written
+             alert("You clicked on event number: " + (indexOfEvent + 1));
+
+         });
 
         // click event for the event
         linkToSavedTickets.on("click", function () {
@@ -286,28 +277,19 @@ function createEventLinks() {
                 title = eventTitle;
             }
 
-
             // store the info into the database
-            addEventToBookmarks(title, city, 0, 0, "", decription);
+            addEventToBookmarks(title, city, 0, 0, listOfEvents[index].url, decription);
 
         });
 
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);
-
         newCardBody.append(eventCity);
         newCardBody.append(desc);
-
         newCardBody.append(linkToSavedTickets);
-
-
         newCardBody.append(linkToBuyTickets);
-
-
         newCard.append(newCardBody);
-
         newCol.append(newCard);
-
 
         // if i % 3 === 0 then there is a multiple of 3 in the current row
         //  so we need to create a new row
@@ -332,17 +314,12 @@ function createEventLinks() {
         }
     }
 
-
 }
-
-///////////////////////////
-//
-
 
 
 // add this to the nav bar??
-// log out button
-// <button id="btnLogOut" class="btn btn-sm btn-block btn-outline-dark hide">Log Out</button>
+
+
 
 var email = "";
 var pass = "";
@@ -358,6 +335,7 @@ $(btnLogIn).on("click", function() {  // returns promises
         console.log(error.code);
     });
 });
+
 
 // create a new account, passing user's email and password input
 // user is automatically logged in
@@ -395,25 +373,4 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether 
         btnLogOut.addClass("hide"); // adds hide class to hide the button
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
