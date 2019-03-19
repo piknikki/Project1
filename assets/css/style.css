@@ -124,7 +124,6 @@ h3 {
 
 .pricing-column {
     padding: 3% 2%;
-
 }
 
 /*. sign in section. */
@@ -136,6 +135,10 @@ h3 {
 #confirmSignUp,
 #alreadyAMember {
     width: 150px;
+}
+
+#alreadyAMember.btn,
+#confirmSignUp.btn {
     margin: 0 5px 0 5px;
 }
 
