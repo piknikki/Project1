@@ -35,7 +35,6 @@ h3 {
     padding-right: 10px;
 }
 #navbar-header{
-
     font-size: 25px;
     font-weight: 500;
 }
@@ -43,6 +42,11 @@ h3 {
 .fa-user-alt {
     margin-left: 10px;
     color: #007bff;
+}
+
+li.nav-item {
+    horiz-align: center;
+    vertical-align: center;
 }
 
 
