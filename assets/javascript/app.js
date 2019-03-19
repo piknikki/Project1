@@ -2,19 +2,19 @@
 /*                                                                              */
 /*      this is the app.js file                                                 */
 /*                                                                              */
- /*******************************************************************************/
+/*******************************************************************************/
 
-   // Initialize Firebase
-   var config = {
+// Initialize Firebase
+var config = {
     apiKey: "AIzaSyBLTkosSO3iupdRISkI3cYT8qtjbY5Ukrs",
     authDomain: "classproject-1db.firebaseapp.com",
     databaseURL: "https://classproject-1db.firebaseio.com",
     projectId: "classproject-1db",
     storageBucket: "classproject-1db.appspot.com",
     messagingSenderId: "90720089463"
-  };
+};
 firebase.initializeApp(config);
-  
+
 
 
 // create a handle to the database
@@ -27,7 +27,7 @@ var qs = "";
 var listOfEvents = [];
 var numBookmarks = 0;
 
-         
+
 /**************************************************************************/
 /*      event:          search_button.click                               */
 /*                                                                        */
@@ -39,7 +39,7 @@ $("#search_button").on("click", function (event) {
     clearSearchResults();
 
     // get the results from the search
-    var searchTitle = $("#searchKeyword").val(); 
+    var searchTitle = $("#searchKeyword").val();
 
     // prevent the form from submitting
     event.preventDefault();
@@ -57,7 +57,7 @@ $("#search_button").on("click", function (event) {
         + "&keyword=" + searchTitle
         + "&countryCode=US";
 
-    
+
     // make a query request to ticketmaster for some information
     $.ajax({
         url: qs,
@@ -108,7 +108,7 @@ function clearSearchResults() {
     // update the html
     $("#event-links").empty();
 
-} 
+}
 
 /**************************************************************************/
 /*      function:       addEventToBookmarks                               */
@@ -120,12 +120,8 @@ function clearSearchResults() {
 /*      return:         none                                              */
 /**************************************************************************/
 function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
-    
-       // increase the number of book marks
-       numBookmarks++;
 
     database.ref().push({
-        numBookmarks: numBookmarks,
         name: _name,
         city: _city,
         locLatitude: _locLat,
@@ -133,84 +129,6 @@ function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
         url: _url,
         desc: _desc
     });
-}
-
-firebase.database().ref().on("child_added", function (_snapshot) {
-    
-
-    for (var i = 0; i < _snapshot.length; ++i) {
-       
-     
-        // create the event link
-        loadBookmark(_snapshot[i].name,
-            _snapshot[i].city,
-            0,
-            0,
-            _snapshot[i].url,
-            _snapshot[i].desc,
-            i
-        );
-    }
-    
-});
-
-
-/**************************************************************************/
-/*      function:       loadBookmark                                     */
-/*                                                                        */
-/*      purpose:        load the saved events from the database           */
-/*                                                                        */
-/*      parameters:     none                                              */
-/*                                                                        */
-/*      return:         none                                              */
-/**************************************************************************/
-function loadBookmark(_name, _city, _locLat, _locLong, _url, _desc, _pos) {
-
-    var newCol = $("<div class='pricing-column col-md-4'></div>");
-    var newCard = $("<div class='card'></div>");
-    var newCardHeader = $("<div class='card-header'></div>");
-    var eventTitle = _name;
-    var eventCity = _city;
-    var desc = _desc;
-    var linkToTicketsBTN = "";
-    var linkToTicketsURL = _url;
-
-    var newCardBody = $("<div class='card-body'></div>");
-
-    linkToTicketsBTN = $("<button class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
-
-    newCardHeader.append(eventTitle);
-    newCard.append(newCardHeader);
-
-    newCardBody.append(eventCity);
-    newCardBody.append(desc);
-    newCardBody.append(linkToTicketsBTN);
-    newCard.append(newCardBody);
-
-    newCol.append(newCard);
-
-     // if i % 3 === 0 then there is a multiple of 3 in the current row
-        //  so we need to create a new row
-        if (i === 0) {
-            var newRow = $("<div class='row r" + rowNum + "'></div>");
-            newRow.append(newCol);
-            $("#event-links").append(newRow);
-
-        }
-        else if (i % 3 === 0) {
-            // create a new row
-            ++rowNum;
-            var newRow = $("<div class='row r" + rowNum + "'></div>");
-            newRow.append(newCol);
-            $("#event-links").append(newRow);
-            
-
-        }
-        else {
-            var temp = ".r" + rowNum;
-            $(temp).append(newCol);
-        }
-
 }
 
 /**************************************************************************/
@@ -253,10 +171,11 @@ function createEventLinks() {
         var eventCity = "";
         var desc = "";
 
-        var linkToTicketsBTN = "";
         var linkToTicketsURL = "";
 
-        var linkToTickets = "";
+        var linkToBuyTickets = "";
+        var linkToSavedTickets = "";
+
 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
@@ -266,7 +185,7 @@ function createEventLinks() {
         }
         var newCardBody = $("<div class='card-body'></div>");
         try {
-           eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
+            eventCity = $("<h2>").text(listOfEvents[i]._embedded.venues[0].city.name);
         }
         catch (e) {
             eventCity = "city not found";
@@ -282,34 +201,37 @@ function createEventLinks() {
         try {
 
             linkToTicketsURL = "";
-            linkToTickets = $("<button id='disp-link-loc'class='btn btn-sm btn-block btn-outline-dark'>Buy</button>");
         }
         catch (e) {
             linkToTicketsURL = "url not found";
         }
-      
-        linkToTicketsBTN = $("<button class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
-       
-        
+
+        linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
+        linkToSavedTickets = $("<button id='disp-save-loc'  btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Save</button>");
+
+
         // click event for the event
-        linkToTicketsBTN.on("click", function () {
+        linkToSavedTickets.on("click", function () {
+
+            var index =  parseInt( $(this).attr("btnid"));
+
             var decription = "";
             var city = "";
             var title = "";
-            try{
-                decription = desc.text();
+            try {
+                decription = listOfEvents[index].promoter.description;
             }
             catch (e) {
                 decription = desc;
             }
             try {
-                city = eventCity.text();
+                city = listOfEvents[index]._embedded.venues[0].city.name;
             }
             catch (e) {
                 city = eventCity;
             }
             try {
-                title = eventTitle.text();
+                title = listOfEvents[index].name;
             }
             catch (e) {
                 title = eventTitle;
@@ -327,9 +249,11 @@ function createEventLinks() {
         newCardBody.append(eventCity);
         newCardBody.append(desc);
 
-        newCardBody.append(linkToTicketsBTN);
+        newCardBody.append(linkToSavedTickets);
 
-        newCardBody.append(linkToTickets);
+
+        newCardBody.append(linkToBuyTickets);
+
 
         newCard.append(newCardBody);
 
