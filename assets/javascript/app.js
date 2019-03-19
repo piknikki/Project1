@@ -339,8 +339,7 @@ function createEventLinks() {
 
 
 // add this to the nav bar??
-// log out button
-// <button id="btnLogOut" class="btn btn-sm btn-block btn-outline-dark hide">Log Out</button>
+
 
 
 var email = "";
