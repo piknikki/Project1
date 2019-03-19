@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <link rel="icon"
+          type="image/png"
+          href="assets/images/favicon.ico">
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
@@ -35,17 +38,6 @@
     <!--<link rel="stylesheet" type="text/css" href="css/reset.css">-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-    <!-- GruntIcon stuff -->
-    <script>
-
-        /*! grunt-grunticon Stylesheet Loader - v2.1.2 | https://github.com/filamentgroup/grunticon | (c) 2015 Scott Jehl, Filament Group, Inc. | MIT license. */
-
-        (function(e){function t(t,n,r,o){"use strict";function a(){for(var e,n=0;u.length>n;n++)u[n].href&&u[n].href.indexOf(t)>-1&&(e=!0);e?i.media=r||"all":setTimeout(a)}var i=e.document.createElement("link"),l=n||e.document.getElementsByTagName("script")[0],u=e.document.styleSheets;return i.rel="stylesheet",i.href=t,i.media="only x",i.onload=o||null,l.parentNode.insertBefore(i,l),a(),i}var n=function(r,o){"use strict";if(r&&3===r.length){var a=e.navigator,i=e.Image,l=!(!document.createElementNS||!document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||e.opera&&-1===a.userAgent.indexOf("Chrome")||-1!==a.userAgent.indexOf("Series40")),u=new i;u.onerror=function(){n.method="png",n.href=r[2],t(r[2])},u.onload=function(){var e=1===u.width&&1===u.height,a=r[e&&l?0:e?1:2];n.method=e&&l?"svg":e?"datapng":"png",n.href=a,t(a,null,null,o)},u.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==",document.documentElement.className+=" grunticon"}};n.loadCSS=t,e.grunticon=n})(this);(function(e,t){"use strict";var n=t.document,r="grunticon:",o=function(e){if(n.attachEvent?"complete"===n.readyState:"loading"!==n.readyState)e();else{var t=!1;n.addEventListener("readystatechange",function(){t||(t=!0,e())},!1)}},a=function(e){return t.document.querySelector('link[href$="'+e+'"]')},c=function(e){var t,n,o,a,c,i,u={};if(t=e.sheet,!t)return u;n=t.cssRules?t.cssRules:t.rules;for(var l=0;n.length>l;l++)o=n[l].cssText,a=r+n[l].selectorText,c=o.split(");")[0].match(/US\-ASCII\,([^"']+)/),c&&c[1]&&(i=decodeURIComponent(c[1]),u[a]=i);return u},i=function(e){var t,o,a;o="data-grunticon-embed";for(var c in e)if(a=c.slice(r.length),t=n.querySelectorAll(a+"["+o+"]"),t.length)for(var i=0;t.length>i;i++)t[i].innerHTML=e[c],t[i].style.backgroundImage="none",t[i].removeAttribute(o);return t},u=function(t){"svg"===e.method&&o(function(){i(c(a(e.href))),"function"==typeof t&&t()})};e.embedIcons=i,e.getCSS=a,e.getIcons=c,e.ready=o,e.svgLoadedCallback=u,e.embedSVG=u})(grunticon,this);
-
-        grunticon(["icons.data.svg.css", "icons.data.png.css", "icons.fallback.css"]);
-    </script>
-    <noscript><link href="assets/css/icons.fallback.css" rel="stylesheet"></noscript>
-
 
 
 </head>
@@ -53,7 +45,8 @@
 <body>
 
     <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
-        <a id="navbar-header" class="navbar-brand text-primary" href="index.html">EventSearch</a>
+
+        <a id="navbar-header" class="navbar-brand text-primary" href="index.html"><img id="logo" src="assets/images/eventlogo.png" alt="EventSearch Logo">EventSearch</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -117,6 +110,7 @@
 
     <!-- Footer Section -->
 
+
 <footer class="footer" id="footer">
     <div class="container">
         <span class="text-primary">Created by Janelle, Kurtis, Nikki, and Steve, with 🧠 and ♥️. </span>
@@ -142,9 +136,10 @@
 
     <script>
         
+       
         function initMap() {
 
-            var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
+            var location = new google.maps.LatLng(39.7392, 104.9903); // declare location in map
 
             var mapCanvas = document.getElementById('map'); // where to place the map in the view
             var mapOptions = { // basic options for the map
@@ -167,14 +162,16 @@
                 { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97 }] }
             ];
 
-            map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
+            var map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
             map.set('styles', styles); // set the greyscale
             
-
            // google.maps.esvent.addDomListener(window, 'load', initMap); // render on page
         }
     </script>
-    <!-- Code to my Javascript File -->
+   
+   <!--link in firebase -->
+   <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+<!-- Code to my Javascript File -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtJCYaXsCU60NdnHju2mGYnqKOZ3syenM&callback=initMap"
         async defer></script>
 
