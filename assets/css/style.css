@@ -28,6 +28,12 @@ h3 {
 }
 
 /*. navbar section. */
+
+#logo {
+    width: 40px;
+    height: auto;
+    padding-right: 10px;
+}
 #navbar-header{
 
     font-size: 25px;
@@ -36,6 +42,17 @@ h3 {
 
 .fa-user-alt {
     margin-left: 10px;
+}
+
+/*. main content section. */
+#main-content {
+    padding: 20px 0 50px;
+}
+
+.signup-main-content,
+.success-main-content {
+    height: 70vh;
+    overflow: auto;
 }
 
 /*. header section. */
@@ -107,21 +124,11 @@ h3 {
 
 }
 
-/*.col-md-3 {*/
-    /*text-align: center;*/
-/*}*/
-
+/*. sign in section. */
 #form-signin {
     max-width: 330px;
     margin: 0 auto;
 }
-
-
-/*.boom {*/
-    /*text-align: center;*/
-    /*display: block;*/
-    /*margin: 20% auto;*/
-/*}*/
 
 #confirmSignUp,
 #alreadyAMember {
@@ -130,17 +137,17 @@ h3 {
 
 
 
-
+/*. footer section. */
 .footer {
     text-align: center;
     padding: 60px 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
+    width: auto;
     height: 60px;
     background-color: #343A40;
-    color: #007BFF;
 }
 
-#footer {
-
+.image {
+    padding: 20px 20px;
 }
+
+

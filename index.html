@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <link rel="icon"
+          type="image/png"
+          href="assets/images/favicon.ico">
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="UTF-8">
@@ -19,6 +22,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 
     <!-- Bootstrap CSS -->
 
@@ -46,12 +51,15 @@
     <!--<link rel="stylesheet" type="text/css" href="css/reset.css">-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+
+
 </head>
 
 <body>
 
     <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark p-2 pl-4 pr-4">
-        <a id="navbar-header" class="navbar-brand text-primary" href="index.html">EventSearch</a>
+
+        <a id="navbar-header" class="navbar-brand text-primary" href="index.html"><img id="logo" src="assets/images/eventlogo.png" alt="EventSearch Logo">EventSearch</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -59,7 +67,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             </ul>
-            <a class="nav-item text-primary mr-3" href="/signup.html">Login or Register <i
+            <a class="nav-item text-primary mr-3" href="http://www.purplepants.io/Project1/signup.html">Login or Register <i
                     class="fas fa-user-alt fa-2x mr-2"></i>
             </a>
         </div>
@@ -87,7 +95,7 @@
                     placeholder="Enter the city...">
             </div>
             <div class="input-group">
-                <input id="searchKeyword" type="text" class="form-control" placeholder="and dates...">
+                <input id="searchKeyword" type="text" class="form-control" placeholder="and a keyword...">
                 <span class="input-group-btn">
                     <button id="search_button" class="btn btn-default">Search</button>
                 </span>
@@ -105,27 +113,23 @@
     <!--  Display event cards   -->
 
     <section id="pricing">
+<<<<<<< HEAD
         <h2>Here are the events we found for you </h2>
         <p>You may select the ones you like and they'll be saved in your cart.</p>
         <div class="container" id="event-links"> </div>
+=======
+>>>>>>> master
+
+            <img class="image" src="assets/images/icecream.png"><img class="image" src="assets/images/theatre.png"><img class="image" src="assets/images/turntable.png">
+            <h2>Here are the events we found for you </h2>
+            <p>You may select the ones you like and they'll be saved in your cart.</p>
+            <div class="container" id ="event-links"> </div>
 
     </section>
 
     <!-- Footer Section -->
 
-    <section id="footer">
-        <div class="container-fluid">
-
-            <div class="row">
-                <div class="col-lg-12">
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-
+<<<<<<< HEAD
     <!-- Footer Section -->
 
     <section class="footer" id="footer">
@@ -140,6 +144,70 @@
 
     <script src="assets/javascript/app.js"></script>
     <!-- Code to my Javascript File -->
+=======
+
+<footer class="footer" id="footer">
+    <div class="container">
+        <span class="text-primary">Created by Janelle, Kurtis, Nikki, and Steve, with 🧠 and ♥️. </span>
+    </div>
+</footer>
+
+
+
+
+    <!-- jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <!-- JS for Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        
+       
+        function initMap() {
+
+            var location = new google.maps.LatLng(39.7392, 104.9903); // declare location in map
+
+            var mapCanvas = document.getElementById('map'); // where to place the map in the view
+            var mapOptions = { // basic options for the map
+                center: location,
+                zoom: 16,
+                panControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            // create greyscale styles
+            var styles = [
+                { "featureType": "landscape", "stylers": [{ "saturation": -100 }, { "lightness": 65 }, { "visibility": "on" }] },
+                { "featureType": "poi", "stylers": [{ "saturation": -100 }, { "lightness": 51 }, { "visibility": "simplified" }] },
+                { "featureType": "road.highway", "stylers": [{ "saturation": -100 }, { "visibility": "simplified" }] },
+                { "featureType": "road.arterial", "stylers": [{ "saturation": -100 }, { "lightness": 30 }, { "visibility": "on" }] },
+                { "featureType": "road.local", "stylers": [{ "saturation": -100 }, { "lightness": 40 }, { "visibility": "on" }] },
+                { "featureType": "transit", "stylers": [{ "saturation": -100 }, { "visibility": "simplified" }] },
+                { "featureType": "administrative.province", "stylers": [{ "visibility": "off" }] },
+                { "featureType": "water", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": -25 }, { "saturation": -100 }] },
+                { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97 }] }
+            ];
+
+            var map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
+            map.set('styles', styles); // set the greyscale
+            
+           // google.maps.esvent.addDomListener(window, 'load', initMap); // render on page
+        }
+    </script>
+   
+   <!--link in firebase -->
+   <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+<!-- Code to my Javascript File -->
+>>>>>>> master
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtJCYaXsCU60NdnHju2mGYnqKOZ3syenM&callback=initMap"
         async defer></script>
 

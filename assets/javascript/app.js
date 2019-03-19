@@ -1,3 +1,15 @@
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBLTkosSO3iupdRISkI3cYT8qtjbY5Ukrs",
+    authDomain: "classproject-1db.firebaseapp.com",
+    databaseURL: "https://classproject-1db.firebaseio.com",
+    projectId: "classproject-1db",
+    storageBucket: "classproject-1db.appspot.com",
+    messagingSenderId: "90720089463"
+};
+firebase.initializeApp(config);
+
 // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
 var lat = 39.6766;
 var lng = -104.9619;
@@ -38,15 +50,29 @@ function initMap() {
 
 }
 
+
+
+
+// create a handle to the database
+var database = firebase.database();
+
+// globals
 var city = "";
 var apiKey = "fN2JT7PZlbQ8jAFoGeun4pAKP8Rg8y5z";
 var qs = "";
 var listOfEvents = [];
+var numBookmarks = 0;
 
+
+/**************************************************************************/
+/*      event:          search_button.click                               */
+/*                                                                        */
+/*      purpose:        respond to the search button being clicked        */
+/**************************************************************************/
 $("#search_button").on("click", function (event) {
 
     // clear any events from previous searches
-    clearEventList();
+    clearSearchResults();
 
     // Grab user location
     var userLocation = $("#searchCity").val();
@@ -54,15 +80,25 @@ $("#search_button").on("click", function (event) {
 
     // get the results from the search
     var searchTitle = $("#searchKeyword").val();
+
+    // prevent the form from submitting
     event.preventDefault();
+
+    // gert the value from the city search field
     city = $("#searchCity").val();
+
+    // store the api key to query the ticketmaster
     apiKey = "fN2JT7PZlbQ8jAFoGeun4pAKP8Rg8y5z";
+
+    // url to link us to ticketmaster
     qs = "https://app.ticketmaster.com//discovery/v2/events?apikey="
         + apiKey
         + "&city=" + city
         + "&keyword=" + searchTitle
         + "&countryCode=US";
 
+
+    // make a query request to ticketmaster for some information
     $.ajax({
         url: qs,
         method: "GET"
@@ -76,6 +112,7 @@ $("#search_button").on("click", function (event) {
         //Reload map
         initMap();
 
+        // try this block of code 
         try {
             // store each event that comes back from the list
             response._embedded.events.forEach(function (_event) {
@@ -84,7 +121,10 @@ $("#search_button").on("click", function (event) {
             })
         }
         catch (e) {
+
+            // if we are here something failed in the try block
             alert("_embedded undefined");
+            console.log(e);
         }
 
         // create the links to the events
@@ -95,7 +135,16 @@ $("#search_button").on("click", function (event) {
     );
 });
 
-function clearEventList() {
+/**************************************************************************/
+/*      function:       clearSearchResults                                */
+/*                                                                        */
+/*      purpose:        to clear the events from the search list          */
+/*                                                                        */
+/*      parameters:     none                                              */
+/*                                                                        */
+/*      return:         none                                              */
+/**************************************************************************/
+function clearSearchResults() {
 
     // clear the list of events
     while (listOfEvents.length !== 0) {
@@ -107,6 +156,7 @@ function clearEventList() {
 
 }
 
+<<<<<<< HEAD
 $("#disp-link-location").on("click", function () {
 
     // add/update the location of the event on the map
@@ -118,6 +168,39 @@ $("#disp-link-location").on("click", function () {
 //              location-latitude
 //              location-longitude
 //              url to purchase tickets
+=======
+/**************************************************************************/
+/*      function:       addEventToBookmarks                               */
+/*                                                                        */
+/*      purpose:        add the event to the list of bookmarks            */
+/*                                                                        */
+/*      parameters:     none                                              */
+/*                                                                        */
+/*      return:         none                                              */
+/**************************************************************************/
+function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
+
+    database.ref().push({
+        name: _name,
+        city: _city,
+        locLatitude: _locLat,
+        locLongitude: _locLong,
+        url: _url,
+        desc: _desc
+    });
+}
+
+/**************************************************************************/
+/*      function:       createEventLinks                                  */
+/*                                                                        */
+/*      purpose:        To create an event and add that event as a        */
+/*                      link to the page.                                 */
+/*                                                                        */
+/*      parameters:     none                                              */
+/*                                                                        */
+/*      return:         none                                              */
+/**************************************************************************/
+>>>>>>> master
 function createEventLinks() {
 
     // create a row witth some columns
@@ -136,10 +219,6 @@ function createEventLinks() {
     //                 </div>
     //             </div>
 
-
-    // make sure to clear any old events from previous searches
-    //clearEventList();
-
     // create the links to the events
     var rowNum = 0;
     for (var i = 0; i < listOfEvents.length; ++i) {
@@ -151,7 +230,13 @@ function createEventLinks() {
         var eventTitle = "";
         var eventCity = "";
         var desc = "";
-        var linkToTickets = "";
+
+        var linkToTicketsURL = "";
+
+        var linkToBuyTickets = "";
+        var linkToSavedTickets = "";
+
+
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
         }
@@ -174,19 +259,65 @@ function createEventLinks() {
         }
 
         try {
-            linkToTickets = $("<button id='disp-link-loc'class='btn btn-lg btn-block btn-outline-dark'>Buy</button>");
+
+            linkToTicketsURL = "";
         }
         catch (e) {
-            linkToTickets = "url not found";
+            linkToTicketsURL = "url not found";
         }
 
+<<<<<<< HEAD
+=======
+        linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
+        linkToSavedTickets = $("<button id='disp-save-loc'  btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Save</button>");
+
+
+        // click event for the event
+        linkToSavedTickets.on("click", function () {
+
+            var index =  parseInt( $(this).attr("btnid"));
+
+            var decription = "";
+            var city = "";
+            var title = "";
+            try {
+                decription = listOfEvents[index].promoter.description;
+            }
+            catch (e) {
+                decription = desc;
+            }
+            try {
+                city = listOfEvents[index]._embedded.venues[0].city.name;
+            }
+            catch (e) {
+                city = eventCity;
+            }
+            try {
+                title = listOfEvents[index].name;
+            }
+            catch (e) {
+                title = eventTitle;
+            }
+
+
+            // store the info into the database
+            addEventToBookmarks(title, city, 0, 0, "", decription);
+
+        });
+>>>>>>> master
 
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);
 
         newCardBody.append(eventCity);
         newCardBody.append(desc);
-        newCardBody.append(linkToTickets);
+
+        newCardBody.append(linkToSavedTickets);
+
+
+        newCardBody.append(linkToBuyTickets);
+
+
         newCard.append(newCardBody);
 
         newCol.append(newCard);
@@ -202,10 +333,11 @@ function createEventLinks() {
         }
         else if (i % 3 === 0) {
             // create a new row
+            ++rowNum;
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#event-links").append(newRow);
-            ++rowNum;
+
 
         }
         else {
