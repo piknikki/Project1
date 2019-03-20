@@ -137,21 +137,18 @@ function loadBM() {
                     // this is the value representing which event this button is linked to in the
                     // event list (listOfEvents)
                     // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-                    var linkToURL = parseInt($(this).attr("btnURL"));
+                    var linkToURL = ($(this).attr("btnURL"));
                     location.href = linkToURL;
+                    window.open (href = listOfEvents[indexOfEvent].url, "_blank");
                     
                 });
         
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
-
                 newCardBody.append(eventCity);
                 newCardBody.append(desc);
                 newCardBody.append(linkToBuyTickets);
-
-
                 newCard.append(newCardBody);
-
                 newCol.append(newCard);
 
                 // if i % 3 === 0 then there is a multiple of 3 in the current row
