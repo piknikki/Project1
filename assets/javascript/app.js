@@ -256,7 +256,7 @@ function createEventLinks() {
             // TODO: have this take the user to buy tickets
             // this is the value representing which event this button is linked to in the
             var indexOfEvent = parseInt( $(this).attr("btnid"));
-            location.href = listOfEvents[indexOfEvent].url;
+            window.open (href = listOfEvents[indexOfEvent].url, "_blank");
 
          });
 
