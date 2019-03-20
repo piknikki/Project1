@@ -44,7 +44,8 @@ function loadBM() {
                 var eventCity = $("<h2>").text(_item.val().city);
                 var desc = $("<p>").text(_item.val().desc);
                 var linkToTicketsURL = _item.val().url;
-
+                var eventDate = $("<h5>").text(_item.val().date);
+    
                 var newCardBody = $("<div class='card-body'></div>");
 
                 linkToBuyTickets = $("<button id='disp-link-loc' btnURL="
@@ -62,6 +63,7 @@ function loadBM() {
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
                 newCardBody.append(eventCity);
+                newCardBody.append(eventDate);
                 newCardBody.append(desc);
                 newCardBody.append(linkToBuyTickets);
                 newCard.append(newCardBody);
@@ -114,7 +116,8 @@ function loadBM() {
                 var eventCity = $("<h2>").text(_item.val().city);
                 var desc = $("<p>").text(_item.val().desc);
                 var linkToTicketsURL = _item.val().url;
-
+                var eventDate = $("<h5>").text(_item.val().date);
+    
                 var newCardBody = $("<div class='card-body'></div>");
 
                 linkToBuyTickets = $("<button id='disp-link-loc' btnURL='"
@@ -131,6 +134,7 @@ function loadBM() {
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
                 newCardBody.append(eventCity);
+                newCardBody.append(eventDate);
                 newCardBody.append(desc);
                 newCardBody.append(linkToBuyTickets);
                 newCard.append(newCardBody);
@@ -165,6 +169,7 @@ function loadBM() {
     }
 }
 
+
 // auth listener
 firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
@@ -174,6 +179,16 @@ firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether
         loadBM();
         $("#log_out").hide();
     }
+});
+
+$(btnSignUp).on("click", function(e) {
+    e.preventDefault();
+    email = $("#email").val().trim();
+    pass = $("#password").val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+        location.href = "success.html";
+        console.log(error.code);
+    });
 });
 
 // signs user out

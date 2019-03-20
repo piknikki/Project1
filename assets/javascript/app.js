@@ -1,3 +1,9 @@
+/********************************************************************************/
+/*                                                                              */
+/*      this is the app.js file                                                 */
+/*                                                                              */
+/*******************************************************************************/
+
 $("document").ready(function () {
     $("#hide-on-load").hide();
     $("#log_out").hide();
@@ -40,12 +46,6 @@ function initMap() {
     }
 
 }
-
-/********************************************************************************/
-/*                                                                              */
-/*      this is the app.js file                                                 */
-/*                                                                              */
-/*******************************************************************************/
 
 // Initialize Firebase
 var config = {
@@ -337,14 +337,14 @@ $(btnLogIn).on("click", function (e) {  // returns promises
 
 // create a new account, passing user's email and password input
 // user is automatically logged in
-$(btnSignUp).on("click", function(e) {
+$(btnSignUp).on("click", function (e) {
     e.preventDefault();
     email = $("#email").val().trim();
     pass = $("#password").val().trim();
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
-
+    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {       
         console.log(error.code);
     });
+    location.href = "success.html";
 });
 
 // signs user out
