@@ -30,7 +30,7 @@ h3 {
 /*. navbar section. */
 
 #logo {
-    width: 40px;
+    width: 50px;
     height: auto;
     padding-right: 10px;
 }
@@ -44,9 +44,9 @@ h3 {
     color: #007bff;
 }
 
-li.nav-item {
-    horiz-align: center;
-    vertical-align: center;
+.nav-login,
+.nav-logout {
+    padding-top: 8px;
 }
 
 
@@ -160,4 +160,7 @@ li.nav-item {
     padding: 20px 20px;
 }
 
+.hide {
+    display: hidden;
+}
 

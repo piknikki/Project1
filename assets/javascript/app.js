@@ -1,5 +1,12 @@
+/********************************************************************************/
+/*                                                                              */
+/*      this is the app.js file                                                 */
+/*                                                                              */
+/*******************************************************************************/
+
 $("document").ready(function () {
     $("#hide-on-load").hide();
+    $().hide();
     console.log("Load");
 });
 
@@ -41,12 +48,6 @@ function initMap() {
     }
 
 }
-
-/********************************************************************************/
-/*                                                                              */
-/*      this is the app.js file                                                 */
-/*                                                                              */
-/*******************************************************************************/
 
 // Initialize Firebase
 var config = {
@@ -109,7 +110,6 @@ $("#search_button").on("click", function (event) {
         url: qs,
         method: "GET"
     }).then(function (response) {
-
         // MAP FUNCTIONALITY (change map coords)
         res = response;
         // Take user input to find lattitude and longitude and re-load map with given lat-long
@@ -133,7 +133,9 @@ $("#search_button").on("click", function (event) {
 
         // create the links to the events
         createEventLinks();
+        console.log(listOfEvents);
     });
+    
 });
 
 /**************************************************************************/
@@ -164,7 +166,7 @@ function clearSearchResults() {
 /*                                                                        */
 /*      return:         none                                              */
 /**************************************************************************/
-function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
+function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc, _date) {
 
     if (firebase.auth().currentUser !== null) {
         database.ref("Users/user" + firebase.auth().currentUser.uid).push({
@@ -173,7 +175,8 @@ function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
             locLatitude: _locLat,
             locLongitude: _locLong,
             url: _url,
-            desc: _desc
+            desc: _desc,
+            date: _date
         });
     }
     else {
@@ -185,7 +188,8 @@ function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc) {
             locLatitude: _locLat,
             locLongitude: _locLong,
             url: _url,
-            desc: _desc
+            desc: _desc,
+            date: _date
         });
     }
 }
@@ -205,7 +209,6 @@ function createEventLinks() {
     var rowNum = 0;
     for (var i = 0; i < listOfEvents.length; ++i) {
 
-
         var newCol = $("<div class='pricing-column col-md-4'></div>");
         var newCard = $("<div class='card'></div>");
         var newCardHeader = $("<div class='card-header'></div>");
@@ -214,7 +217,9 @@ function createEventLinks() {
         var desc = "";
         var linkToBuyTickets = "";
         var linkToSavedTickets = "";
+        var eventDate = "";
 
+ 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
         }
@@ -228,7 +233,12 @@ function createEventLinks() {
         catch (e) {
             eventCity = "city not found";
         }
-
+        try {
+            eventDate = $("<h5>").text(listOfEvents[i].dates.start.localDate);
+        }
+        catch (e) {
+            eventDate = "date not found";
+        }
         try {
             desc = $("<p>").text(listOfEvents[i].promoter.description);
         }
@@ -247,7 +257,7 @@ function createEventLinks() {
             // TODO: have this take the user to buy tickets
             // this is the value representing which event this button is linked to in the
             var indexOfEvent = parseInt( $(this).attr("btnid"));
-            location.href = listOfEvents[indexOfEvent].url;
+            window.open (href = listOfEvents[indexOfEvent].url, "_blank");
 
          });
 
@@ -259,6 +269,8 @@ function createEventLinks() {
             var decription = "";
             var city = "";
             var title = "";
+            var date = "";
+
             try {
                 decription = listOfEvents[index].promoter.description;
             }
@@ -272,6 +284,12 @@ function createEventLinks() {
                 city = eventCity;
             }
             try {
+                date = listOfEvents[index].dates.start.localDate;
+            }
+            catch (e) {
+                date = eventDate;
+            }
+            try {
                 title = listOfEvents[index].name;
             }
             catch (e) {
@@ -279,13 +297,14 @@ function createEventLinks() {
             }
 
             // store the info into the database
-            addEventToBookmarks(title, city, 0, 0, listOfEvents[index].url, decription);
+            addEventToBookmarks(title, city, 0, 0, listOfEvents[index].url, decription, date);
 
         });
 
         newCardHeader.append(eventTitle);
         newCard.append(newCardHeader);
         newCardBody.append(eventCity);
+        newCardBody.append(eventDate);
         newCardBody.append(desc);
         newCardBody.append(linkToSavedTickets);
         newCardBody.append(linkToBuyTickets);
@@ -336,14 +355,14 @@ $(btnLogIn).on("click", function (e) {  // returns promises
 
 // create a new account, passing user's email and password input
 // user is automatically logged in
-$(btnSignUp).on("click", function(e) {
+$(btnSignUp).on("click", function (e) {
     e.preventDefault();
     email = $("#email").val().trim();
     pass = $("#password").val().trim();
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
-
+    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {       
         console.log(error.code);
     });
+    location.href = "success.html";
 });
 
 // signs user out
@@ -384,4 +403,5 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether 
         btnLogOut.addClass("hide"); // adds hide class to hide the button
     }
 });
+
 

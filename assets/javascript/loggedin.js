@@ -44,7 +44,8 @@ function loadBM() {
                 var eventCity = $("<h2>").text(_item.val().city);
                 var desc = $("<p>").text(_item.val().desc);
                 var linkToTicketsURL = _item.val().url;
-
+                var eventDate = $("<h5>").text(_item.val().date);
+    
                 var newCardBody = $("<div class='card-body'></div>");
 
                 linkToBuyTickets = $("<button id='disp-link-loc' btnURL="
@@ -68,6 +69,7 @@ function loadBM() {
                 newCard.append(newCardHeader);
 
                 newCardBody.append(eventCity);
+                newCardBody.append(eventDate);
                 newCardBody.append(desc);
                 newCardBody.append(linkToBuyTickets);
 
@@ -123,7 +125,8 @@ function loadBM() {
                 var eventCity = $("<h2>").text(_item.val().city);
                 var desc = $("<p>").text(_item.val().desc);
                 var linkToTicketsURL = _item.val().url;
-
+                var eventDate = $("<h5>").text(_item.val().date);
+    
                 var newCardBody = $("<div class='card-body'></div>");
 
                 linkToBuyTickets = $("<button id='disp-link-loc' btnURL='"
@@ -144,14 +147,11 @@ function loadBM() {
 
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
-
                 newCardBody.append(eventCity);
+                newCardBody.append(eventDate);
                 newCardBody.append(desc);
                 newCardBody.append(linkToBuyTickets);
-
-
                 newCard.append(newCardBody);
-
                 newCol.append(newCard);
 
                 // if i % 3 === 0 then there is a multiple of 3 in the current row
@@ -183,6 +183,7 @@ function loadBM() {
     }
 }
 
+
 // auth listener
 firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
@@ -193,12 +194,22 @@ firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether
         var userId = firebaseUser.uid;
         console.log("user id: " + userId);
         console.log("firebaseuser object: " + firebaseUser);
-        // btnLogOut.removeClass("hide"); // removes hide class to show the button
+        $("#log_out").show(); // removes hide class to show the button
     } else {
         loadBM();
         console.log("not logged in")
-        //  btnLogOut.addClass("hide"); // adds hide class to hide the button
+         $("#log_out").hide(); // adds hide class to hide the button
     }
+});
+
+$(btnSignUp).on("click", function(e) {
+    e.preventDefault();
+    email = $("#email").val().trim();
+    pass = $("#password").val().trim();
+    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+        location.href = "success.html";
+        console.log(error.code);
+    });
 });
 
 // signs user out
