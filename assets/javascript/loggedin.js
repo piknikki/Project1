@@ -201,3 +201,12 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether 
     }
 });
 
+// signs user out
+$("#log_out").on("click", function() {
+    firebase.auth().signOut().then(function() {
+        console.log("successfully signed out")
+    }).catch(function(error) {
+        console.log(error.code);
+    });
+});
+
