@@ -349,6 +349,9 @@ $(btnLogIn).on("click", function (e) {  // returns promises
         console.log(error.code);
     });
 
+    $("input").val("");
+    location.href = "loggedin.html";
+
 });
 
 
