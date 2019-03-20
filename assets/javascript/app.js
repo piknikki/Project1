@@ -6,7 +6,7 @@
 
 $("document").ready(function () {
     $("#hide-on-load").hide();
-    $().hide();
+    $("#log_out").hide();
     console.log("Load");
 });
 
@@ -18,10 +18,8 @@ var res;
 //Load Map using user location
 function initMap() {
 
-
     // var location = new google.maps.LatLng(50.0875726, 14.4189987); // declare location in map
     var location = new google.maps.LatLng(lat, lng); // declare location in map
-
 
     var mapCanvas = document.getElementById('map'); // where to place the map in the view
     var mapOptions = { // basic options for the map
@@ -71,7 +69,6 @@ var qs = "";
 var listOfEvents = [];
 var numBookmarks = 0;
 
-
 /**************************************************************************/
 /*      event:          search_button.click                               */
 /*                                                                        */
@@ -90,7 +87,6 @@ $("#search_button").on("click", function (event) {
     // get the results from the search
     var searchTitle = $("#searchKeyword").val();
 
-  
     // gert the value from the city search field
     city = $("#searchCity").val();
 
@@ -103,7 +99,6 @@ $("#search_button").on("click", function (event) {
         + "&city=" + city
         + "&keyword=" + searchTitle
         + "&countryCode=US";
-
 
     // make a query request to ticketmaster for some information
     $.ajax({
@@ -128,23 +123,18 @@ $("#search_button").on("click", function (event) {
         catch (e) {
             // if we are here something failed in the try block
             alert("Unable to find an event. Update your search criteria.");
-
         }
 
         // create the links to the events
         createEventLinks();
-        console.log(listOfEvents);
     });
     
 });
 
 /**************************************************************************/
 /*      function:       clearSearchResults                                */
-/*                                                                        */
 /*      purpose:        to clear the events from the search list          */
-/*                                                                        */
 /*      parameters:     none                                              */
-/*                                                                        */
 /*      return:         none                                              */
 /**************************************************************************/
 function clearSearchResults() {
@@ -159,11 +149,8 @@ function clearSearchResults() {
 
 /**************************************************************************/
 /*      function:       addEventToBookmarks                               */
-/*                                                                        */
 /*      purpose:        add the event to the list of bookmarks            */
-/*                                                                        */
 /*      parameters:     none                                              */
-/*                                                                        */
 /*      return:         none                                              */
 /**************************************************************************/
 function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc, _date) {
@@ -181,7 +168,6 @@ function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc, _date
     }
     else {
    
-
         database.ref("general-bookmarks").push({
             name: _name,
             city: _city,
@@ -196,12 +182,9 @@ function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc, _date
 
 /**************************************************************************/
 /*      function:       createEventLinks                                  */
-/*                                                                        */
 /*      purpose:        To create an event and add that event as a        */
 /*                      link to the page.                                 */
-/*                                                                        */
 /*      parameters:     none                                              */
-/*                                                                        */
 /*      return:         none                                              */
 /**************************************************************************/
 function createEventLinks() {
@@ -219,7 +202,6 @@ function createEventLinks() {
         var linkToSavedTickets = "";
         var eventDate = "";
 
- 
         try {
             eventTitle = $("<h3>").text(listOfEvents[i].name);
         }
@@ -247,19 +229,18 @@ function createEventLinks() {
             $("<p>").hide(desc="");
         }
 
-
         linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
         linkToSavedTickets = $("<button id='disp-save-loc'  btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Save</button>");
 
-         // click event for the event
-         linkToBuyTickets.on("click", function () {
+        // click event for the event
+        linkToBuyTickets.on("click", function () {
 
-            // TODO: have this take the user to buy tickets
+            // have this take the user to buy tickets
             // this is the value representing which event this button is linked to in the
             var indexOfEvent = parseInt( $(this).attr("btnid"));
             window.open (href = listOfEvents[indexOfEvent].url, "_blank");
 
-         });
+        });
 
         // click event for the event
         linkToSavedTickets.on("click", function () {
@@ -317,7 +298,6 @@ function createEventLinks() {
             var newRow = $("<div class='row r" + rowNum + "'></div>");
             newRow.append(newCol);
             $("#event-links").append(newRow);
-
         }
         else if ((i % 3) === 0) {
             // create a new row
@@ -331,7 +311,6 @@ function createEventLinks() {
             $(temp).append(newCol);
         }
     }
-
 }
 
 var email = "";
@@ -349,6 +328,9 @@ $(btnLogIn).on("click", function (e) {  // returns promises
     firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
         console.log(error.code);
     });
+
+    $("input").val("");
+    location.href = "loggedin.html";
 
 });
 

@@ -55,27 +55,18 @@ function loadBM() {
                 // click event for the event
                 linkToBuyTickets.on("click", function () {
 
-                    // TODO: have this take the user to buy tickets
-
-                    // this is the value representing which event this button is linked to in the
-                    // event list (listOfEvents)
-                    // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
                     var linkToURL = $(this).attr("btnURL");
-                    // location.href = linkToURL;
+
                     window.open(href = linkToURL, "_blank");
                 });
 
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
-
                 newCardBody.append(eventCity);
                 newCardBody.append(eventDate);
                 newCardBody.append(desc);
                 newCardBody.append(linkToBuyTickets);
-
-
                 newCard.append(newCardBody);
-
                 newCol.append(newCard);
 
                 // if i % 3 === 0 then there is a multiple of 3 in the current row
@@ -135,14 +126,9 @@ function loadBM() {
                 // click event for the event
                 linkToBuyTickets.on("click", function () {
 
-                    // TODO: have this take the user to buy tickets
-
-                    // this is the value representing which event this button is linked to in the
-                    // event list (listOfEvents)
-                    // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
                     var linkToURL = $(this).attr("btnURL");
-                    window.open(href = linkToURL, "_blank");
-
+                    window.open (href = linkToURL, "_blank");
+                    
                 });
 
                 newCardHeader.append(eventTitle);
@@ -188,17 +174,10 @@ function loadBM() {
 firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
         loadBM();
-        alert("user has signed in, id is: " + firebaseUser.uid);
-        // var displayEmail = firebaseUser.email;
-        // var emailVerified = firebaseUser.emailVerified;
-        var userId = firebaseUser.uid;
-        console.log("user id: " + userId);
-        console.log("firebaseuser object: " + firebaseUser);
-        $("#log_out").show(); // removes hide class to show the button
+        $("#log_out").show();
     } else {
         loadBM();
-        console.log("not logged in")
-         $("#log_out").hide(); // adds hide class to hide the button
+        $("#log_out").hide();
     }
 });
 
@@ -213,11 +192,11 @@ $(btnSignUp).on("click", function(e) {
 });
 
 // signs user out
-$("#log_out").on("click", function () {
-    firebase.auth().signOut().then(function () {
-        console.log("successfully signed out")
-    }).catch(function (error) {
-        console.log(error.code);
+$("#log_out").on("click", function() {
+    firebase.auth().signOut().then(function() {
+
+    }).catch(function(error) {
+
     });
 });
 
