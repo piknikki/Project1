@@ -28,7 +28,8 @@ function loadBM() {
 
 
     var curUser = firebase.auth().currentUser;
-    if (firebase.auth().currentUser !== null) { 
+    if (firebase.auth().currentUser !== null) {
+
         firebase.database().ref("Users/user" + firebase.auth().currentUser.uid).on("value", function (_snapshot) {
 
             var i = 0;
@@ -42,28 +43,27 @@ function loadBM() {
                 var eventTitle = $("<h3>").text(_item.val().name);
                 var eventCity = $("<h2>").text(_item.val().city);
                 var desc = $("<p>").text(_item.val().desc);
-                var linkToTicketsURL = "";
+                var linkToTicketsURL = _item.val().url;
 
                 var newCardBody = $("<div class='card-body'></div>");
 
-                linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
-      
+                linkToBuyTickets = $("<button id='disp-link-loc' btnURL="
+                    + linkToTicketsURL + " class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
+
+
                 // click event for the event
                 linkToBuyTickets.on("click", function () {
 
                     // TODO: have this take the user to buy tickets
-             
+
                     // this is the value representing which event this button is linked to in the
                     // event list (listOfEvents)
                     // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-                    var indexOfEvent = parseInt($(this).attr("btnid"));
-
-                    // this alert is just to make sure the button works
-                    // it can be safely deleted when the actual functionality is written
-                    alert("You clicked on event number: " + (indexOfEvent + 1));
-
+                    var linkToURL = $(this).attr("btnURL");
+                    // location.href = linkToURL;
+                    window.open(href = linkToURL, "_blank");
                 });
-        
+
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
 
@@ -126,22 +126,22 @@ function loadBM() {
 
                 var newCardBody = $("<div class='card-body'></div>");
 
-                linkToBuyTickets = $("<button id='disp-link-loc' btnURL="
-                    + linkToTicketsURL + "class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
-      
+                linkToBuyTickets = $("<button id='disp-link-loc' btnURL='"
+                    + linkToTicketsURL + "'class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
+
                 // click event for the event
                 linkToBuyTickets.on("click", function () {
 
                     // TODO: have this take the user to buy tickets
-             
+
                     // this is the value representing which event this button is linked to in the
                     // event list (listOfEvents)
                     // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-                    var linkToURL = parseInt($(this).attr("btnURL"));
-                    location.href = linkToURL;
-                    
+                    var linkToURL = $(this).attr("btnURL");
+                    window.open(href = linkToURL, "_blank");
+
                 });
-        
+
                 newCardHeader.append(eventTitle);
                 newCard.append(newCardHeader);
 
@@ -184,7 +184,7 @@ function loadBM() {
 }
 
 // auth listener
-firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether or not user is logged in
+firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
         loadBM();
         alert("user has signed in, id is: " + firebaseUser.uid);
@@ -193,19 +193,19 @@ firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether 
         var userId = firebaseUser.uid;
         console.log("user id: " + userId);
         console.log("firebaseuser object: " + firebaseUser);
-       // btnLogOut.removeClass("hide"); // removes hide class to show the button
+        // btnLogOut.removeClass("hide"); // removes hide class to show the button
     } else {
         loadBM();
         console.log("not logged in")
-      //  btnLogOut.addClass("hide"); // adds hide class to hide the button
+        //  btnLogOut.addClass("hide"); // adds hide class to hide the button
     }
 });
 
 // signs user out
-$("#log_out").on("click", function() {
-    firebase.auth().signOut().then(function() {
+$("#log_out").on("click", function () {
+    firebase.auth().signOut().then(function () {
         console.log("successfully signed out")
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log(error.code);
     });
 });
