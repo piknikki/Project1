@@ -132,14 +132,8 @@ function loadBM() {
                 // click event for the event
                 linkToBuyTickets.on("click", function () {
 
-                    // TODO: have this take the user to buy tickets
-             
-                    // this is the value representing which event this button is linked to in the
-                    // event list (listOfEvents)
-                    // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-                    var linkToURL = ($(this).attr("btnURL"));
-                    location.href = linkToURL;
-                    window.open (href = listOfEvents[indexOfEvent].url, "_blank");
+                    var linkToURL = $(this).attr("btnURL");
+                    window.open (href = linkToURL, "_blank");
                     
                 });
         
@@ -184,26 +178,19 @@ function loadBM() {
 firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
         loadBM();
-        alert("user has signed in, id is: " + firebaseUser.uid);
-        // var displayEmail = firebaseUser.email;
-        // var emailVerified = firebaseUser.emailVerified;
-        var userId = firebaseUser.uid;
-        console.log("user id: " + userId);
-        console.log("firebaseuser object: " + firebaseUser);
-       // btnLogOut.removeClass("hide"); // removes hide class to show the button
+        $("#log_out").show();
     } else {
         loadBM();
-        console.log("not logged in")
-      //  btnLogOut.addClass("hide"); // adds hide class to hide the button
+        $("#log_out").hide();
     }
 });
 
 // signs user out
 $("#log_out").on("click", function() {
     firebase.auth().signOut().then(function() {
-        console.log("successfully signed out")
+
     }).catch(function(error) {
-        console.log(error.code);
+
     });
 });
 
