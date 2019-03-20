@@ -44,10 +44,16 @@ h3 {
     color: #007bff;
 }
 
-li.nav-item {
-    horiz-align: center;
-    vertical-align: center;
+/*a.nav-link {*/
+    /*padding: 0;*/
+/*}*/
+
+#nav-link1 {
+    padding-top: 12px;
+
 }
+
+
 
 
 /*. main content section. */
