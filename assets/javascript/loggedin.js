@@ -21,7 +21,8 @@ firebase.initializeApp(config);
 // create a handle to the database
 var database = firebase.database();
 
-
+// list to keep url links in
+var listOfURLs = [];
 
 function loadBM() {
 
@@ -121,11 +122,12 @@ function loadBM() {
                 var eventTitle = $("<h3>").text(_item.val().name);
                 var eventCity = $("<h2>").text(_item.val().city);
                 var desc = $("<p>").text(_item.val().desc);
-                var linkToTicketsURL = "";
+                var linkToTicketsURL = _item.val().url;
 
                 var newCardBody = $("<div class='card-body'></div>");
 
-                linkToBuyTickets = $("<button id='disp-link-loc' btnid='" + i + "' class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
+                linkToBuyTickets = $("<button id='disp-link-loc' btnURL="
+                    + linkToTicketsURL + "class= 'btn btn-sm btn-block btn-outline-dark'>Buy</button>");
       
                 // click event for the event
                 linkToBuyTickets.on("click", function () {
@@ -135,12 +137,9 @@ function loadBM() {
                     // this is the value representing which event this button is linked to in the
                     // event list (listOfEvents)
                     // EXAMPLE: "listOfEvents[indexOfEvent].name" gets the name of this event
-                    var indexOfEvent = parseInt($(this).attr("btnid"));
-
-                    // this alert is just to make sure the button works
-                    // it can be safely deleted when the actual functionality is written
-                    alert("You clicked on event number: " + (indexOfEvent + 1));
-
+                    var linkToURL = parseInt($(this).attr("btnURL"));
+                    location.href = linkToURL;
+                    
                 });
         
                 newCardHeader.append(eventTitle);
