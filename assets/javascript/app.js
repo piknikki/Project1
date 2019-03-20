@@ -337,7 +337,7 @@ var email = "";
 var pass = "";
 var btnSignUp = $("#confirmSignUp");
 var btnLogIn = $("#alreadyAMember");
-var btnLogOut = $("#logOut");
+var btnLogOut = $("#log_out");
 
 // Login event -- pass user email and password
 $(btnLogIn).on("click", function (e) {  // returns promises
