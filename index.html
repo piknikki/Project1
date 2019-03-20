@@ -17,9 +17,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <!-- Bootswatch Styling for Improving the Aesthetics -->
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css">-->
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -56,8 +53,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
             <li class="nav-item"><a class="nav-link text-primary mr-3" href="#">Log Out</a></li>
-            <li class="nav-item"><a class="nav-link text-primary mr-3" href="http://www.purplepants.io/Project1/signup.html">Login or Register</a></li>
-            <li class="nav-item"><a class="nav-link text-primary mr-3" href="http://www.purplepants.io/Project1/loggedin.html"><i class="fas fa-user-alt fa-2x mr-2"></i></a></li>
+            <li class="nav-item"><a class="nav-link text-primary mr-3" href="https://github.com/piknikki/Project1/signup.html">Login or Register</a></li>
+            <li class="nav-item"><a class="nav-link text-primary mr-3" href="https://github.com/piknikki/Project1/loggedin.html"><i class="fas fa-user-alt fa-2x mr-2"></i></a></li>
         </ul>
     </div>
 </nav>
@@ -77,15 +74,16 @@
     </section>
 
     <!--  Search zone  -->
-    <section id="main-content" class="text-center pb-5">
+    <section id="main-content" class="text-center pb-4">
         <form class="form-inline justify-content-center">
             <div class="form-group">
 
-                <input id="searchCity" type="text" class="form-control rounded" name="search_city"
+                <input id="searchCity" type="text" class="form-control rounded mr-3" name="search_city"
                     placeholder="Enter the city...">
             </div>
             <div class="input-group">
-                <input id="searchKeyword" type="text" class="form-control rounded" placeholder="and a keyword...">
+
+                <input id="searchKeyword" type="text" class="form-control rounded" placeholder="Keyword (optional)...">
 
                 <span class="input-group-btn">
                     <button id="search_button" class="btn btn-default ml-2 border">Search</button>
@@ -103,19 +101,18 @@
 
     <!--  Display event cards   -->
 
+<div id="hide-on-load">
     <section id="pricing" class="pt-5">
 
             <img class="image" src="assets/images/icecream.png"><img class="image" src="assets/images/theatre.png"><img class="image" src="assets/images/turntable.png">
             <h2>Here are the events we found for you </h2>
             <p>You may select the ones you like and they'll be saved in your cart.</p>
             <div class="container" id ="event-links"> </div>
-
     </section>
+</div>
 
     <!-- Footer Section -->
-
-
-<footer class="footer" id="footer">
+<footer class="footer mt-5" id="footer">
     <div class="container">
         <span class="text-primary">Created by Janelle, Kurtis, Nikki, and Steve, with 🧠 and ♥️. </span>
     </div>
@@ -138,97 +135,15 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- <script>
-        
-       
-        function initMap() {
-
-            var location = new google.maps.LatLng(39.7392, 104.9903); // declare location in map
-
-            var mapCanvas = document.getElementById('map'); // where to place the map in the view
-            var mapOptions = { // basic options for the map
-                center: location,
-                zoom: 16,
-                panControl: false,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-
-            // create greyscale styles
-            var styles = [
-                { "featureType": "landscape", "stylers": [{ "saturation": -100 }, { "lightness": 65 }, { "visibility": "on" }] },
-                { "featureType": "poi", "stylers": [{ "saturation": -100 }, { "lightness": 51 }, { "visibility": "simplified" }] },
-                { "featureType": "road.highway", "stylers": [{ "saturation": -100 }, { "visibility": "simplified" }] },
-                { "featureType": "road.arterial", "stylers": [{ "saturation": -100 }, { "lightness": 30 }, { "visibility": "on" }] },
-                { "featureType": "road.local", "stylers": [{ "saturation": -100 }, { "lightness": 40 }, { "visibility": "on" }] },
-                { "featureType": "transit", "stylers": [{ "saturation": -100 }, { "visibility": "simplified" }] },
-                { "featureType": "administrative.province", "stylers": [{ "visibility": "off" }] },
-                { "featureType": "water", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": -25 }, { "saturation": -100 }] },
-                { "featureType": "water", "elementType": "geometry", "stylers": [{ "hue": "#ffff00" }, { "lightness": -25 }, { "saturation": -97 }] }
-            ];
-
-            var map = new google.maps.Map(mapCanvas, mapOptions); // create a new object and pass configurations from above
-            map.set('styles', styles); // set the greyscale
-            
-           // google.maps.esvent.addDomListener(window, 'load', initMap); // render on page
-        }
-    </script> -->
    
-   <!--link in firebase -->
-   <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
-<!-- Code to my Javascript File -->
+    <!--link in firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+    <!-- Code to my Javascript File -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtJCYaXsCU60NdnHju2mGYnqKOZ3syenM&callback=initMap"
         async defer></script>
-
     <script src="assets/javascript/app.js"></script>
 
 
 </body>
 
 </html>
-
-
-
-
-
-     <!-- <div class="row">
-                <div class="pricing-column col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Event Number 1</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <h2>location of event</h2>
-                            <p>Short description</p>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pricing-column col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Event Number 2</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <h2>location of event</h2>
-                            <p>Short description</p>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pricing-column col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Event Number 3</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <h2>location of event</h2>
-                            <p>Short description</p>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-dark">Buy</button>
-                        </div>
-                    </div>
-                </div> -->
