@@ -15,7 +15,7 @@ var config = {
     projectId: "classproject-1db",
     storageBucket: "classproject-1db.appspot.com",
     messagingSenderId: "90720089463"
-};
+  };
 firebase.initializeApp(config);
 
 // create a handle to the database
@@ -179,16 +179,6 @@ firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether
         loadBM();
         $("#log_out").hide();
     }
-});
-
-$(btnSignUp).on("click", function(e) {
-    e.preventDefault();
-    email = $("#email").val().trim();
-    pass = $("#password").val().trim();
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
-        location.href = "success.html";
-        console.log(error.code);
-    });
 });
 
 // signs user out

@@ -3,6 +3,29 @@
 /*      this is the app.js file                                                 */
 /*                                                                              */
 /*******************************************************************************/
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBLTkosSO3iupdRISkI3cYT8qtjbY5Ukrs",
+    authDomain: "classproject-1db.firebaseapp.com",
+    databaseURL: "https://classproject-1db.firebaseio.com",
+    projectId: "classproject-1db",
+    storageBucket: "classproject-1db.appspot.com",
+    messagingSenderId: "90720089463"
+  };
+  firebase.initializeApp(config);
+
+
+// create a handle to the database
+var database = firebase.database();
+
+// globals
+var city = "";
+var apiKey = "fN2JT7PZlbQ8jAFoGeun4pAKP8Rg8y5z";
+var qs = "";
+var listOfEvents = [];
+var numBookmarks = 0;
+var bHasCreatedAccount = false;
+var bHasSignedIn = false;
 
 $("document").ready(function () {
     $("#hide-on-load").hide();
@@ -47,27 +70,7 @@ function initMap() {
 
 }
 
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyBLTkosSO3iupdRISkI3cYT8qtjbY5Ukrs",
-    authDomain: "classproject-1db.firebaseapp.com",
-    databaseURL: "https://classproject-1db.firebaseio.com",
-    projectId: "classproject-1db",
-    storageBucket: "classproject-1db.appspot.com",
-    messagingSenderId: "90720089463"
-};
 
-firebase.initializeApp(config);
-
-// create a handle to the database
-var database = firebase.database();
-
-// globals
-var city = "";
-var apiKey = "fN2JT7PZlbQ8jAFoGeun4pAKP8Rg8y5z";
-var qs = "";
-var listOfEvents = [];
-var numBookmarks = 0;
 
 /**************************************************************************/
 /*      event:          search_button.click                               */
@@ -155,6 +158,7 @@ function clearSearchResults() {
 /**************************************************************************/
 function addEventToBookmarks(_name, _city, _locLat, _locLong, _url, _desc, _date) {
 
+    var cu = firebase.auth().currentUser;
     if (firebase.auth().currentUser !== null) {
         database.ref("Users/user" + firebase.auth().currentUser.uid).push({
             name: _name,
@@ -324,13 +328,14 @@ $(btnLogIn).on("click", function (e) {  // returns promises
     e.preventDefault();
     email = $("#email").val().trim();
     pass = $("#password").val().trim();
-   
+    bHasSignedIn = true;
     firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
+        bHasSignedIn = false;
         console.log(error.code);
     });
 
     $("input").val("");
-    location.href = "loggedin.html";
+   // location.href = "loggedin.html";
 
 });
 
@@ -341,10 +346,16 @@ $(btnSignUp).on("click", function (e) {
     e.preventDefault();
     email = $("#email").val().trim();
     pass = $("#password").val().trim();
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {       
+    bHasCreatedAccount = true;
+    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function (error) { 
+        bHasCreatedAccount = false;
         console.log(error.code);
+    
     });
-    location.href = "success.html";
+    // firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {       
+    //     console.log(error.code);
+    // });
+   // location.href = "success.html";
 });
 
 // signs user out
@@ -356,34 +367,29 @@ $(btnLogOut).on("click", function() {
     });
 });
 
-$("#pop").on("click", function () {
-    alert("user id: " + firebase.auth().currentUser);
-});
-
-$("#pip").on("click", function () {
-    firebase.auth().signOut().then(function() {
-        console.log("successfully signed out")
-    }).catch(function(error) {
-        console.log(error.code);
-    });
-});
 
 // auth listener
-firebase.auth().onAuthStateChanged(function(firebaseUser) { // based on whether or not user is logged in
+firebase.auth().onAuthStateChanged(function (firebaseUser) { // based on whether or not user is logged in
     if (firebaseUser) {
-        
-        alert("user has signed in, id is: " + firebaseUser.uid);
-        // var displayEmail = firebaseUser.email;
-        // var emailVerified = firebaseUser.emailVerified;
-        var userId = firebaseUser.uid;
-        console.log("user id: " + userId);
-        console.log("firebaseuser object: " + firebaseUser);
-        btnLogOut.removeClass("hide"); // removes hide class to show the button
-    } else {
 
-        console.log("not logged in")
-        btnLogOut.addClass("hide"); // adds hide class to hide the button
+        console.log("user has signed in");
+        $("#log_out").show();
+        if (bHasCreatedAccount) {
+
+            location.href = "success.html";
+            bHasCreatedAccount = false;
+        }
+        else if (bHasSignedIn) {
+           
+            location.href = "loggedin.html";
+            bHasSignedIn = false;
+        }
     }
+    else {
+        $("#log_out").hide();
+    }
+
+
 });
 
 
