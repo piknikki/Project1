@@ -11,4 +11,4 @@ Project1 is a team project; team members are Janelle, Kurtis, myself, and Steve 
 * Firebase for db storage and authentication
 
 # Link to live app
-http://www.purplepants.io/Project1 
+https://www.nikkipetersen.dev/Project1 
